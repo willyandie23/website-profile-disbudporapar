@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\GaleryController;
+use App\Http\Controllers\API\NewsController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -42,6 +43,11 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
     Route::get('/galery/create', [GaleryController::class, 'create'])->name('gallery.create');
     Route::get('/galery/{category}/edit', [GaleryController::class, 'edit'])->name('gallery.edit');
     Route::post('/galery', [GaleryController::class, 'store'])->name('gallery.store');
+    
+    Route::get('/news', [NewsController::class, 'newsShow'])->name('news.index');
+    Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
+    Route::get('/news/{category}/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::post('/news', [NewsController::class, 'store'])->name('news.store');
 });
 
 require __DIR__.'/auth.php';

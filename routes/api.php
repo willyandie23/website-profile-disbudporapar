@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\GaleryController;
+use App\Http\Controllers\API\NewsController;
 use App\Http\Controllers\API\OrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -19,6 +20,7 @@ Route::get('/categories', [CategoryController::class, 'index']);
 
 Route::get('/banner', [BannerController::class, 'index']);
 Route::get('/galery', [GaleryController::class, 'index']);
+Route::get('/news', [NewsController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/banner', [BannerController::class, 'store']);
@@ -40,4 +42,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/galery/{id}', [GaleryController::class, 'show']);
     Route::put('/galery/{id}', [GaleryController::class, 'update']);
     Route::delete('/galery/{id}', [GaleryController::class, 'destroy']);
+    
+    Route::post('/news', [NewsController::class, 'store']);
+    Route::get('/news/{id}', [NewsController::class, 'show']);
+    Route::put('/news/{id}', [NewsController::class, 'update']);
+    Route::delete('/news/{id}', [NewsController::class, 'destroy']);
 });
