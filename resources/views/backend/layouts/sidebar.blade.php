@@ -3,7 +3,6 @@
         <div class="m-header">
             <a href="{{ url('/dashboard') }}" class="b-brand text-primary">
                 <img src="{{ asset('assets/images/logo-dark.svg') }}" class="img-fluid logo-lg" alt="logo">
-                E-SKM
                 {{-- <img src="{{ asset('frontend/img/logo3.png') }}" alt="Logo" style="height: 50px;"> --}}
             </a>
         </div>
@@ -82,13 +81,13 @@
                     </a>
                     <ul class="pc-submenu">
                         <li class="pc-item">
-                            <a class="pc-link" href="">
+                            <a class="pc-link" href="{{ route('category.index') }}">
                                 Kategori
                             </a>
                         </li>
                         <li class="pc-item">
-                            <a class="pc-link" href="">
-                                Daftar Organisasi
+                            <a class="pc-link" href="{{ route('organizations.index') }}">
+                                Daftar Anggota
                             </a>
                         </li>
                     </ul>

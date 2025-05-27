@@ -83,7 +83,7 @@
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    {{-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> --}}
     
     <!--Datatables -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -94,7 +94,7 @@
         const token = "{{ session('api_token') }}";
         console.log('API token:', token);
     </script>
-    <script src="{{ asset('js/notification.js') }}"></script>
+    {{-- <script src="{{ asset('js/notification.js') }}"></script> --}}
     @stack('scripts')
 </body>
 
@@ -102,22 +102,22 @@
 
 @push('scripts')
     <script>
-        $(document).ready(function() {
-            $.ajax({
-                url: '/api/identities',
-                type: 'GET',
-                success: function(response) {
-                    if (response.success && response.data) {
-                        if (response.data.site_pavicon) {
-                            $('#site_pavicon').attr('href', response.data.site_pavicon).show();
-                        }
-                    }
-                },
-                error: function(xhr) {
-                    console.error('Error fetching Identities data:', xhr.responseText);
-                    Swal.fire('Error!', 'Failed to load Identities data.', 'error');
-                }
-            });
-        });
+        // $(document).ready(function() {
+        //     $.ajax({
+        //         url: '/api/identities',
+        //         type: 'GET',
+        //         success: function(response) {
+        //             if (response.success && response.data) {
+        //                 if (response.data.site_pavicon) {
+        //                     $('#site_pavicon').attr('href', response.data.site_pavicon).show();
+        //                 }
+        //             }
+        //         },
+        //         error: function(xhr) {
+        //             console.error('Error fetching Identities data:', xhr.responseText);
+        //             Swal.fire('Error!', 'Failed to load Identities data.', 'error');
+        //         }
+        //     });
+        // });
     </script>
 @endpush

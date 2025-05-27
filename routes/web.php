@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\API\BannerController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -24,6 +26,16 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
     Route::get('/banner/create', [BannerController::class, 'create'])->name('banner.create');
     Route::get('/banner/{slider}/edit', [BannerController::class, 'edit'])->name('banner.edit');
     Route::post('/banner', [BannerController::class, 'store'])->name('banner.store');
+
+    Route::get('/organizational-structure/organizations', [OrganizationController::class, 'organizationShow'])->name('organizations.index');
+    Route::get('/organizational-structure/organizations/create', [OrganizationController::class, 'create'])->name('organizations.create');
+    Route::get('/organizational-structure/organizations/{organizations}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
+    Route::post('/organizational-structure/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
+
+    Route::get('/organizational-structure/category', [CategoryController::class, 'organizationCategoriesShow'])->name('category.index');
+    Route::get('/organizational-structure/category/create', [CategoryController::class, 'create'])->name('category.create');
+    Route::get('/organizational-structure/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
+    Route::post('/organizational-structure/category', [CategoryController::class, 'store'])->name('category.store');
 });
 
 require __DIR__.'/auth.php';
