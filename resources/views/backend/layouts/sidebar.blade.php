@@ -56,7 +56,7 @@
                             </a>
                         </li>
                         <li class="pc-item">
-                            <a class="pc-link" href="">
+                            <a class="pc-link" href="{{ route('gallery.index') }}">
                                 Galeri
                             </a>
                         </li>

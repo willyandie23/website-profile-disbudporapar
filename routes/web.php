@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\ProfileController;
@@ -36,6 +37,11 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
     Route::get('/organizational-structure/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::get('/organizational-structure/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/organizational-structure/category', [CategoryController::class, 'store'])->name('category.store');
+    
+    Route::get('/galery', [GaleryController::class, 'galleryShow'])->name('gallery.index');
+    Route::get('/galery/create', [GaleryController::class, 'create'])->name('gallery.create');
+    Route::get('/galery/{category}/edit', [GaleryController::class, 'edit'])->name('gallery.edit');
+    Route::post('/galery', [GaleryController::class, 'store'])->name('gallery.store');
 });
 
 require __DIR__.'/auth.php';
