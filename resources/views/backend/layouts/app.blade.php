@@ -92,7 +92,7 @@
     <script>
         const csrf_token = '{{ csrf_token() }}';
         const token = "{{ session('api_token') }}";
-        const agencyId = "{{ auth()->user()->agency_id }}";
+        console.log('API token:', token);
     </script>
     <script src="{{ asset('js/notification.js') }}"></script>
     @stack('scripts')

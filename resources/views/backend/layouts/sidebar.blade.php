@@ -33,7 +33,7 @@
                             </a>
                         </li>
                         <li class="pc-item">
-                            <a class="pc-link" href="">
+                            <a class="pc-link" href="{{ route('banner.index') }} ">
                                 Slider/Banner
                             </a>
                         </li>
@@ -74,11 +74,24 @@
                         <span class="pc-mtext">Agenda</span>
                     </a>
                 </li>
-                <li class="pc-item">
-                    <a href="" class="pc-link">
-                        <span class="pc-micon"><i class="ti ti-mailbox"></i></span>
+                <li class="pc-item pc-hasmenu">
+                    <a href="#!" class="pc-link">
+                        <span class="pc-micon"><i class="ti ti-files"></i></span>
                         <span class="pc-mtext">Struktur Organisasi</span>
+                        <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
+                    <ul class="pc-submenu">
+                        <li class="pc-item">
+                            <a class="pc-link" href="">
+                                Kategori
+                            </a>
+                        </li>
+                        <li class="pc-item">
+                            <a class="pc-link" href="">
+                                Daftar Organisasi
+                            </a>
+                        </li>
+                    </ul>
                 </li>
                 <li class="pc-item">
                     <a href="" class="pc-link">
