@@ -1107,6 +1107,403 @@
                 ]
             }
         },
+        "/api/downloads": {
+            "get": {
+                "tags": [
+                    "Download"
+                ],
+                "summary": "Retrieve a list of Download files",
+                "operationId": "ca81595e9572753c577d697956cf4be0",
+                "responses": {
+                    "200": {
+                        "description": "Download files retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/download"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Unauthorized",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Unauthorized"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Forbidden",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Forbidden"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Download"
+                ],
+                "summary": "Upload a PDF file",
+                "operationId": "c5a21f500dc8e40c7b464ac6a583fa1f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "file": {
+                                        "description": "PDF file",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "File uploaded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "File uploaded successfully"
+                                        },
+                                        "file": {
+                                            "$ref": "#/components/schemas/download"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Invalid file type or size"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Server error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Failed to upload file"
+                                        },
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Database error"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/downloads/{id}": {
+            "get": {
+                "tags": [
+                    "Download"
+                ],
+                "summary": "Retrieve a single Download file by ID",
+                "operationId": "a74cd6ef920fd2a7682242640ec0c41e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Download file ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Download file retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/download"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Download file not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Download not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "Download"
+                ],
+                "summary": "Update a file by ID",
+                "operationId": "f2daf9d242b484808868c35e51f71e92",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "File ID to update",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "file_name": {
+                                        "type": "string",
+                                        "example": "updated_file.pdf"
+                                    },
+                                    "file": {
+                                        "description": "PDF file to replace",
+                                        "type": "string",
+                                        "format": "binary"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "File updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "File updated successfully"
+                                        },
+                                        "file": {
+                                            "$ref": "#/components/schemas/download"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "File not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Download"
+                ],
+                "summary": "Delete a file by ID",
+                "operationId": "aabe5790bcf8808fe0b26476ebc2270e",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "File ID to delete",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File deleted successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "File deleted successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "File not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/api/downloads/{id}/download": {
+            "post": {
+                "tags": [
+                    "Download"
+                ],
+                "summary": "Download a file by ID",
+                "operationId": "224b2409122c05195facb786337fc4d5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "File ID to download",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "File downloaded successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "File downloaded successfully"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "File not found",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "File not found"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
         "/api/galery": {
             "get": {
                 "tags": [
@@ -2646,6 +3043,27 @@
                 },
                 "type": "object"
             },
+            "download": {
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "file_name": {
+                        "type": "string",
+                        "example": "file_example.pdf"
+                    },
+                    "total_download": {
+                        "type": "integer",
+                        "example": 10
+                    },
+                    "file_path": {
+                        "type": "string",
+                        "example": "http://example.com/storage/file_example.pdf"
+                    }
+                },
+                "type": "object"
+            },
             "galery": {
                 "properties": {
                     "id": {
@@ -2821,6 +3239,10 @@
         {
             "name": "Organization Categories",
             "description": "Organization Categories"
+        },
+        {
+            "name": "Download",
+            "description": "Download"
         },
         {
             "name": "Gallery",

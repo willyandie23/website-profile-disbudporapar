@@ -61,7 +61,7 @@
                             </a>
                         </li>
                         <li class="pc-item">
-                            <a class="pc-link" href="">
+                            <a class="pc-link" href="{{ route('download.index') }}">
                                 Unduhan
                             </a>
                         </li>

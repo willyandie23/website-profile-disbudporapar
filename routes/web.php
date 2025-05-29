@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\DownloadController;
 use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\NewsController;
 use App\Http\Controllers\API\OrganizationController;
@@ -41,13 +42,19 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
     
     Route::get('/galery', [GaleryController::class, 'galleryShow'])->name('gallery.index');
     Route::get('/galery/create', [GaleryController::class, 'create'])->name('gallery.create');
-    Route::get('/galery/{category}/edit', [GaleryController::class, 'edit'])->name('gallery.edit');
+    Route::get('/galery/{galery}/edit', [GaleryController::class, 'edit'])->name('gallery.edit');
     Route::post('/galery', [GaleryController::class, 'store'])->name('gallery.store');
     
     Route::get('/news', [NewsController::class, 'newsShow'])->name('news.index');
     Route::get('/news/create', [NewsController::class, 'create'])->name('news.create');
-    Route::get('/news/{category}/edit', [NewsController::class, 'edit'])->name('news.edit');
+    Route::get('/news/{news}/edit', [NewsController::class, 'edit'])->name('news.edit');
     Route::post('/news', [NewsController::class, 'store'])->name('news.store');
+
+    Route::get('/downloads', [DownloadController::class, 'downloadShow'])->name('download.index');
+    Route::get('/downloads/create', [DownloadController::class, 'create'])->name('download.create');
+    Route::get('/downloads/{downloads}/edit', [DownloadController::class, 'edit'])->name('download.edit');
+    Route::post('/downloads', [DownloadController::class, 'store'])->name('download.store');
+    Route::post('/downloads/{downloads}/download', [DownloadController::class, 'download'])->name('downloads.download');
 });
 
 require __DIR__.'/auth.php';

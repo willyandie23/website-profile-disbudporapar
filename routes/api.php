@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\DownloadController;
 use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\NewsController;
 use App\Http\Controllers\API\OrganizationController;
@@ -21,6 +22,7 @@ Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/banner', [BannerController::class, 'index']);
 Route::get('/galery', [GaleryController::class, 'index']);
 Route::get('/news', [NewsController::class, 'index']);
+Route::get('/downloads', [DownloadController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/banner', [BannerController::class, 'store']);
@@ -47,4 +49,10 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/news/{id}', [NewsController::class, 'show']);
     Route::put('/news/{id}', [NewsController::class, 'update']);
     Route::delete('/news/{id}', [NewsController::class, 'destroy']);
+    
+    Route::post('/downloads', [DownloadController::class, 'store']);
+    Route::get('/downloads/{id}', [DownloadController::class, 'show']);
+    Route::put('/downloads/{id}', [DownloadController::class, 'update']);
+    Route::delete('/downloads/{id}', [DownloadController::class, 'destroy']);
+    Route::post('/downloads/{id}/download', [DownloadController::class, 'download']);
 });
