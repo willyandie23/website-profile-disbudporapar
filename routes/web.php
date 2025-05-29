@@ -1,14 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\API\NewsController;
+use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\BannerController;
+use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DownloadController;
-use App\Http\Controllers\API\GaleryController;
-use App\Http\Controllers\API\NewsController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
-use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
@@ -55,6 +56,9 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
     Route::get('/downloads/{downloads}/edit', [DownloadController::class, 'edit'])->name('download.edit');
     Route::post('/downloads', [DownloadController::class, 'store'])->name('download.store');
     Route::post('/downloads/{downloads}/download', [DownloadController::class, 'download'])->name('downloads.download');
+
+    Route::get('/app-logs', [AppLogController::class, 'index'])->name('logs.index');
+    Route::get('/app-logs/{id}', [AppLogController::class, 'show'])->name('logs.show');
 });
 
 require __DIR__.'/auth.php';

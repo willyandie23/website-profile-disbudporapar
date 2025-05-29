@@ -1,13 +1,14 @@
 <?php
 
-use App\Http\Controllers\API\BannerController;
-use App\Http\Controllers\API\CategoryController;
-use App\Http\Controllers\API\DownloadController;
-use App\Http\Controllers\API\GaleryController;
-use App\Http\Controllers\API\NewsController;
-use App\Http\Controllers\API\OrganizationController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\NewsController;
+use App\Http\Controllers\API\AppLogController;
+use App\Http\Controllers\API\BannerController;
+use App\Http\Controllers\API\GaleryController;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\DownloadController;
+use App\Http\Controllers\API\OrganizationController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -15,10 +16,9 @@ Route::get('/user', function (Request $request) {
 
 Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout'])->middleware('auth:api');
-
+Route::resource('app-logs', AppLogController::class, ['only' => ['index', 'show']]);
 Route::get('/organizations', [OrganizationController::class, 'index']);
 Route::get('/categories', [CategoryController::class, 'index']);
-
 Route::get('/banner', [BannerController::class, 'index']);
 Route::get('/galery', [GaleryController::class, 'index']);
 Route::get('/news', [NewsController::class, 'index']);

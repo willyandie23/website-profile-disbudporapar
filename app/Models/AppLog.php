@@ -8,7 +8,7 @@ use OpenApi\Annotations as OA;
 /**
  * Class AppLog.
  *
- * @author  Yusup H. <yusufxyz114@gmail.com>
+ * @author  Willyandie S. <willyandie.sc@gmail.com>
  *
  * @OA\Schema(
  *     description="AppLog model",

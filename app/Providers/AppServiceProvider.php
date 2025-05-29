@@ -2,10 +2,14 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\ServiceProvider;
-// use Laravel\Passport\Passport;
-use Laravel\Passport\Passport;
 use routes;
+// use Laravel\Passport\Passport;
+use App\Traits\ModelLog;
+use Laravel\Passport\Passport;
+use Illuminate\Auth\Events\Login;
+use Illuminate\Auth\Events\Logout;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,6 +26,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        // Tangkap event login
+        Event::listen(Login::class, function ($event) {
+            ModelLog::storeAuthLog('LOGIN');
+        });
+
+        // Tangkap event logout
+        Event::listen(Logout::class, function ($event) {
+            ModelLog::storeAuthLog('LOGOUT');
+        });
     }
 }

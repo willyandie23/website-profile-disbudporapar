@@ -103,8 +103,8 @@
                         <label>Manajemen Aplikasi</label>
                         <i class="ti ti-dashboard"></i>
                     </li>
-                    <li class="pc-item">
-                        <a href="" class="pc-link">
+                    <li class="pc-item {{ request()->is('app-logs*') ? 'active' : '' }}">
+                        <a href="{{ url('app-logs') }}" class="pc-link">
                             <span class="pc-micon"><i class="ti ti-receipt"></i></span>
                             <span class="pc-mtext">Log Aktivitas</span>
                         </a>
