@@ -3,11 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\API\NewsController;
-use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DownloadController;
+use App\Http\Controllers\API\IdentityController;
+use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
 
@@ -59,6 +60,9 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
 
     Route::get('/app-logs', [AppLogController::class, 'index'])->name('logs.index');
     Route::get('/app-logs/{id}', [AppLogController::class, 'show'])->name('logs.show');
+
+    Route::get('/identity', [IdentityController::class, 'identityShow'])->name('identity.index');
+    Route::post('/identity', [IdentityController::class, 'store'])->name('identity.store');
 });
 
 require __DIR__.'/auth.php';

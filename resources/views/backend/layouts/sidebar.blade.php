@@ -27,7 +27,7 @@
                     </a>
                     <ul class="pc-submenu">
                         <li class="pc-item">
-                            <a class="pc-link" href="">
+                            <a class="pc-link" href="{{ route('identity.index') }}">
                                 Identitas Website
                             </a>
                         </li>
@@ -90,13 +90,12 @@
                                 Daftar Anggota
                             </a>
                         </li>
+                        <li class="pc-item">
+                            <a class="pc-link" href="">
+                                Bidang Kantor
+                            </a>
+                        </li>
                     </ul>
-                </li>
-                <li class="pc-item">
-                    <a href="" class="pc-link">
-                        <span class="pc-micon"><i class="ti ti-users"></i></span>
-                        <span class="pc-mtext">Bidang Kantor</span>
-                    </a>
                 </li>
                 @hasrole('superadmin')
                     <li class="pc-item pc-caption">

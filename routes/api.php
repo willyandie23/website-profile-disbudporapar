@@ -8,6 +8,7 @@ use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DownloadController;
+use App\Http\Controllers\API\IdentityController;
 use App\Http\Controllers\API\OrganizationController;
 
 Route::get('/user', function (Request $request) {
@@ -23,6 +24,7 @@ Route::get('/banner', [BannerController::class, 'index']);
 Route::get('/galery', [GaleryController::class, 'index']);
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/downloads', [DownloadController::class, 'index']);
+Route::get('/identities', [IdentityController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/banner', [BannerController::class, 'store']);
@@ -55,4 +57,9 @@ Route::middleware('auth:api')->group(function () {
     Route::put('/downloads/{id}', [DownloadController::class, 'update']);
     Route::delete('/downloads/{id}', [DownloadController::class, 'destroy']);
     Route::post('/downloads/{id}/download', [DownloadController::class, 'download']);
+
+    Route::post('/identities', [IdentityController::class, 'store']);
+    Route::get('/identities/{id}', [IdentityController::class, 'show']);
+    Route::put('/identities/{id}', [IdentityController::class, 'update']);
+    Route::delete('/identities/{id}', [IdentityController::class, 'destroy']);
 });
