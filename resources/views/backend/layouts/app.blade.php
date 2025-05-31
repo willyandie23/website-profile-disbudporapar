@@ -50,9 +50,9 @@
             <div class="page-header">
                 <div class="page-block">
                     <div class="row align-items-center">
-                        {{-- <div class="col-md-12">
+                        <div class="col-md-12">
                             {{ Breadcrumbs::render() }}
-                        </div> --}}
+                        </div>
                     </div>
                 </div>
             </div>

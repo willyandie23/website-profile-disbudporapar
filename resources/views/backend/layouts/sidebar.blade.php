@@ -21,7 +21,7 @@
                 </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link">
-                        <span class="pc-micon"><i class="ti ti-files"></i></span>
+                        <span class="pc-micon"><i class="ti ti-world"></i></span>
                         <span class="pc-mtext">Manajemen Website</span>
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>
@@ -34,11 +34,6 @@
                         <li class="pc-item">
                             <a class="pc-link" href="{{ route('banner.index') }} ">
                                 Slider/Banner
-                            </a>
-                        </li>
-                        <li class="pc-item">
-                            <a class="pc-link" href="">
-                                Logo & Favicon
                             </a>
                         </li>
                     </ul>
@@ -67,15 +62,9 @@
                         </li>
                     </ul>
                 </li>
-                <li class="pc-item">
-                    <a href="" class="pc-link">
-                        <span class="pc-micon"><i class="ti ti-id"></i></span>
-                        <span class="pc-mtext">Agenda</span>
-                    </a>
-                </li>
                 <li class="pc-item pc-hasmenu">
                     <a href="#!" class="pc-link">
-                        <span class="pc-micon"><i class="ti ti-files"></i></span>
+                        <span class="pc-micon"><i class="ti ti-user"></i></span>
                         <span class="pc-mtext">Struktur Organisasi</span>
                         <span class="pc-arrow"><i data-feather="chevron-right"></i></span>
                     </a>

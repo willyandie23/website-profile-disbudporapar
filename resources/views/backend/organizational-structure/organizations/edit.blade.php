@@ -52,7 +52,7 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="image">Ubah Gambar Galeri (opsional)</label>
+                            <label for="image">Ubah Gambar Anggota (opsional)</label>
                             <input
                                 type="file"
                                 name="image"
