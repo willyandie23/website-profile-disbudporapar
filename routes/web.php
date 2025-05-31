@@ -7,6 +7,7 @@ use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DownloadController;
+use App\Http\Controllers\API\FieldController;
 use App\Http\Controllers\API\IdentityController;
 use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
@@ -41,6 +42,11 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
     Route::get('/organizational-structure/category/create', [CategoryController::class, 'create'])->name('category.create');
     Route::get('/organizational-structure/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
     Route::post('/organizational-structure/category', [CategoryController::class, 'store'])->name('category.store');
+    
+    Route::get('/organizational-structure/fields', [FieldController::class, 'fieldShow'])->name('field.index');
+    Route::get('/organizational-structure/fields/create', [FieldController::class, 'create'])->name('field.create');
+    Route::get('/organizational-structure/fields/{field}/edit', [FieldController::class, 'edit'])->name('field.edit');
+    Route::post('/organizational-structure/fields', [FieldController::class, 'store'])->name('field.store');
     
     Route::get('/galery', [GaleryController::class, 'galleryShow'])->name('gallery.index');
     Route::get('/galery/create', [GaleryController::class, 'create'])->name('gallery.create');
