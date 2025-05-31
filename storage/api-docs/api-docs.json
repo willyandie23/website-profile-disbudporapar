@@ -3795,6 +3795,23 @@
                                                 }
                                             },
                                             "type": "object"
+                                        },
+                                        "field": {
+                                            "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "name": {
+                                                    "type": "string",
+                                                    "example": "Example Field"
+                                                }
+                                            },
+                                            "type": "object"
+                                        },
+                                        "image": {
+                                            "type": "string",
+                                            "example": "Example Image"
                                         }
                                     },
                                     "type": "object"
@@ -3877,6 +3894,12 @@
                                     },
                                     "category_id": {
                                         "type": "integer"
+                                    },
+                                    "field_id": {
+                                        "type": "integer"
+                                    },
+                                    "image": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -3908,6 +3931,14 @@
                                                 "category_id": {
                                                     "type": "integer",
                                                     "example": 1
+                                                },
+                                                "field_id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "example": "image_updated"
                                                 }
                                             },
                                             "type": "object"
@@ -4308,6 +4339,10 @@
                     "updated_at": {
                         "type": "string",
                         "format": "date-time"
+                    },
+                    "image": {
+                        "type": "string",
+                        "example": "dummy.jpg"
                     }
                 },
                 "type": "object"

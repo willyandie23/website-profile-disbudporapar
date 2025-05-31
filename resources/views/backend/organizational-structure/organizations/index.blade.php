@@ -17,6 +17,8 @@
                                 <th>Nama</th>
                                 <th>Posisi</th>
                                 <th>Kategori</th>
+                                <th>Bidang</th>
+                                <th>Gambar</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>
@@ -67,6 +69,18 @@
                         data: 'category.name',
                         render: function(data) {
                             return data ? data : 'Tidak Ada Kategori';
+                        }
+                    },
+                    {
+                        data: 'field.name',
+                        render: function(data) {
+                            return data ? data : 'Tidak Ada Kategori';
+                        }
+                    },
+                    {
+                        data: 'image',
+                        render: function(data) {
+                            return data ? `<img src="${data}" width="100">` : 'Tidak Ada Gambar';
                         }
                     },
                     {

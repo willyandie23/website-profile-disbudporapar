@@ -35,6 +35,31 @@
                                 @endforeach
                             </select>
                         </div>
+                        
+                        <div class="form-group">
+                            <label for="field_id">Kategori</label>
+                            <select class="form-control" id="field_id" name="field_id" required>
+                                <option value="">Pilih Kategori</option>
+                                @foreach ($fields as $field)
+                                    <option value="{{ $field->id }}"
+                                        @if ($organizations->field_id == $field->id) 
+                                            selected 
+                                        @endif>
+                                        {{ $field->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="image">Ubah Gambar Galeri (opsional)</label>
+                            <input
+                                type="file"
+                                name="image"
+                                id="image"
+                                class="form-control"
+                            >
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
@@ -47,60 +72,58 @@
 
 @push('scripts')
     <script>
-        const organizationId = "{{ $organizations->id }}";
-        const apiUrl = `/api/organizations/${organizationId}`;
+        document.getElementById('organizationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('organizationForm');
-            if (!form) {
-                console.error('Form tidak ditemukan');
-                return;
-            }
+            const fileInput    = document.getElementById('image');
+            const name        = document.getElementById('name').value;
+            const position        = document.getElementById('position').value;
+            const category_id        = document.getElementById('category_id').value;
+            const field_id        = document.getElementById('field_id').value;;
+            const apiUrl       = `/api/organizations/{{ $organizations->id }}`;
 
-            form.addEventListener('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData(form);
-                const data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
+            if (fileInput.files.length) {
+                const fd = new FormData();
+                fd.append('_method', 'PUT');
+                fd.append('name', name);
+                fd.append('position', position);
+                fd.append('category_id', category_id);
+                fd.append('field_id', field_id);
+                fd.append('image', fileInput.files[0]);
+
+                const res = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: fd
                 });
 
-                fetch(apiUrl, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: JSON.stringify(data)
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(err => {
-                                throw new Error(err.message || 'Network response was not ok');
-                            });
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log('API Response:', data); // Log the full response for debugging
-                        if (data.message === 'Organization updated successfully') {
-                            Swal.fire({
-                                title: 'Success!',
-                                text: 'Anggota berhasil diperbarui',
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            }).then(() => {
-                                window.location.href = '/organizational-structure/organizations';
-                            });
-                        } else {
-                            throw new Error('Response tidak valid');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error updating Organizations:', error);
-                        alert('Gagal memperbarui Anggota: ' + error.message);
-                    });
+                return handleResponse(res);
+            }
+
+            const payload = { title, description };
+            const res = await fetch(apiUrl, {
+                method: 'PUT',
+                headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(payload)
             });
+
+            handleResponse(res);
         });
+
+        async function handleResponse(response) {
+            const data = await response.json();
+            if (response.ok && data.message === 'Organization updated successfully') {
+                Swal.fire('Sukses!', 'Anggota berhasil diperbarui.', 'success')
+                .then(() => window.location.href = '{{ route("organizations.index") }}');
+            } else {
+                Swal.fire('Error!', data.message || 'Update gagal', 'error');
+            }
+        }
     </script>
 @endpush

@@ -8,8 +8,9 @@
         <div class="col-md-6 col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form id="organizationForm" method="POST" action="{{ route('organizations.store') }}">
+                    <form id="organizationForm" enctype="multipart/form-data">
                         @csrf
+
                         <div class="form-group">
                             <label for="name">Nama</label>
                             <input type="text" class="form-control" id="name" name="name" required>
@@ -27,6 +28,20 @@
                                 @endforeach
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="field_id">Bidang</label>
+                            <select class="form-control" id="field_id" name="field_id" required>
+                                <option value="">Pilih Bidang</option>
+                                @foreach ($fields as $field)
+                                    <option value="{{ $field->id }}">{{ $field->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="image">Gambar Anggota</label>
+                            <input type="file" name="image" id="image" class="form-control" required>
+                        </div>
+                        
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
                 </div>
@@ -38,65 +53,49 @@
 
 @push('scripts')
     <script>
-        const apiUrl = '/api/organizations';
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('organizationForm');  // Define the form variable
+            const url = "{{ route('organizations.store') }}";  // Set the form action URL
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('organizationForm');
-            if (!form) {
-                console.error('Form tidak ditemukan');
-                return;
-            }
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault(); // Prevent default form submission
 
-            if (!token) {
-                console.error('API token tidak tersedia');
-                alert('Silakan login kembali untuk mendapatkan token');
-                return;
-            }
+                const formData = new FormData(form); // Gather the form data
 
-            form.addEventListener('submit', function(event) {
-                event.preventDefault(); // Prevent the default form submission
-                const formData = new FormData(form);
-                const data = {};
-                formData.forEach((value, key) => {
-                    data[key] = value;
-                });
-
-                // Send the data via fetch to the API
-                fetch(apiUrl, {
+                try {
+                    const res = await fetch(url, {
                         method: 'POST',
                         headers: {
-                            'Content-Type': 'application/json',
-                            'Authorization': `Bearer ${token}`
+                            'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value // CSRF Token
                         },
-                        body: JSON.stringify(data) // Ensure the data is sent as JSON
-                    })
-                    .then(response => {
-                        if (!response.ok) {
-                            return response.json().then(err => {
-                                throw new Error(err.message || 'Network response was not ok');
-                            });
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        console.log(data);
-                        if (data.message === 'Organization created successfully') {
-                            Swal.fire({
-                                title: 'Success!',
-                                text: 'Anggota Berhasil Dibuat',
-                                icon: 'success',
-                                confirmButtonText: 'OK'
-                            }).then(() => {
-                                window.location.href = '/organizational-structure/organizations';
-                            });
-                        } else {
-                            throw new Error('Response tidak valid');
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error creating Organizations:', error);
-                        alert('Gagal membuat Anggota: ' + error.message);
+                        body: formData // Send the form data with the file
                     });
+
+                    const text = await res.text(); // Get raw response as text
+                    console.log(text); // Log the response for debugging
+
+                    if (!res.ok) {
+                        throw new Error(text || 'Gagal menyimpan Anggota');
+                    }
+
+                    const data = JSON.parse(text); // Parse the text as JSON
+                    Swal.fire({
+                        title: 'Sukses!',
+                        text: 'Anggota berhasil dibuat',
+                        icon: 'success',
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        window.location.href = "{{ route('organizations.index') }}"; // Redirect after success
+                    });
+
+                } catch (error) {
+                    console.error('Error:', error); // Log any errors for debugging
+                    Swal.fire({
+                        title: 'Error!',
+                        text: error.message,
+                        icon: 'error'
+                    });
+                }
             });
         });
     </script>

@@ -11,10 +11,15 @@ class Organization extends Model
 {
     use ModelLog, SoftDeletes, HasFactory;
 
-    protected $fillable = ['name', 'position', 'category_id'];
+    protected $fillable = ['name', 'position', 'category_id', 'image', 'field_id'];
 
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
+    }
+
+    public function field()
+    {
+        return $this->belongsTo(Field::class, 'field_id');
     }
 }

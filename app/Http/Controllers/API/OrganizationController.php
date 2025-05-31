@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Category;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
+use App\Models\Field;
+use Illuminate\Support\Facades\Storage;
 
 /**
  * @OA\Schema(
@@ -17,7 +19,8 @@ use App\Models\Category;
  *     @OA\Property(property="position", type="string", example="Kepala Dinas"),
  *     @OA\Property(property="cateogry_id", type="string", example="Kepala Dinas"),
  *     @OA\Property(property="created_at", type="string", format="date-time"),
- *     @OA\Property(property="updated_at", type="string", format="date-time")
+ *     @OA\Property(property="updated_at", type="string", format="date-time"),
+ *     @OA\Property(property="image", type="string", example="dummy.jpg")
  * )
  */
 class OrganizationController extends Controller
@@ -132,22 +135,31 @@ class OrganizationController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'field_id' => 'required|exists:fields,id',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
 
         try {
-            $organizations = Organization::create([
+            $imagePath = $request->file('image')->store('organizations', 'public');
+
+            $organization = Organization::create([
                 'name' => $request->name,
                 'position' => $request->position,
                 'category_id' => $request->category_id,
+                'field_id' => $request->field_id,
+                'image' => Storage::url($imagePath)
             ]);
 
             return response()->json([
                 'message' => 'Organization created successfully',
-                'Organization' => $organizations
+                'organization' => $organization
             ], 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to create Organization', 'error' => $e->getMessage()], 500);
+            return response()->json([
+                'message' => 'Failed to create Organization',
+                'error' => $e->getMessage()
+            ], 500);
         }
     }
 
@@ -171,10 +183,19 @@ class OrganizationController extends Controller
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="name", type="string", example="Example Organization"),
      *             @OA\Property(property="position", type="string", example="Example position"),
-     *             @OA\Property(property="category", type="object",
+     *             @OA\Property(
+     *                 property="category", 
+     *                 type="object",
      *                 @OA\Property(property="id", type="integer", example=1),
      *                 @OA\Property(property="name", type="string", example="Example Category")
-     *             )
+     *             ),
+     *             @OA\Property(
+     *                 property="field", 
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Example Field")
+     *             ),
+     *             @OA\Property(property="image", type="string", example="Example Image")
      *         )
      *     ),
      *     @OA\Response(
@@ -230,6 +251,8 @@ class OrganizationController extends Controller
      *             @OA\Property(property="name", type="string"),
      *             @OA\Property(property="position", type="string"),
      *             @OA\Property(property="category_id", type="integer"),
+     *             @OA\Property(property="field_id", type="integer"),
+     *             @OA\Property(property="image", type="string"),
      *         )
      *     ),
      *     @OA\Response(
@@ -242,7 +265,9 @@ class OrganizationController extends Controller
      *                 type="object",
      *                 @OA\Property(property="name", type="string", example="name_updated"),
      *                 @OA\Property(property="position", type="string", example="position_updated"),
-     *                 @OA\Property(property="category_id", type="integer", example=1)
+     *                 @OA\Property(property="category_id", type="integer", example=1),
+     *                 @OA\Property(property="field_id", type="integer", example=1),
+     *                 @OA\Property(property="image", type="string", example="image_updated"),
      *             )
      *         )
      *     ),
@@ -286,7 +311,8 @@ class OrganizationController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id'
+            'category_id' => 'required|exists:categories,id',
+            'field_id' => 'required|exists:fields,id'
         ]);
 
         $organizations = Organization::find($id);
@@ -295,10 +321,21 @@ class OrganizationController extends Controller
         }
 
         try {
+            if ($request->hasFile('image')) {
+                if ($organizations->image) {
+                    $imagePath = str_replace('organizations', 'public', $organizations->image);
+                    Storage::delete($imagePath);
+                }
+
+                $imagePath = $request->file('image')->store('organizations', 'public');
+                $organizations->image = Storage::url($imagePath);
+            }
+
             $organizations->update([
                 'name' => $request->name,
                 'position' => $request->position,
                 'category_id' => $request->category_id,
+                'field_id' => $request->field_id,
             ]);
 
             return response()->json([
@@ -378,13 +415,15 @@ class OrganizationController extends Controller
     {
         $organizations = Organization::all();
         $categories = Category::all();
-        return view('backend.organizational-structure.organizations.create', compact('organizations', 'categories'));
+        $fields = Field::all();
+        return view('backend.organizational-structure.organizations.create', compact('organizations', 'categories', 'fields'));
     }
-
+    
     public function edit($id)
     {
         $organizations = Organization::findOrFail($id);
         $categories = Category::all();
-        return view('backend.organizational-structure.organizations.edit', compact('organizations', 'categories'));
+        $fields = Field::all();
+        return view('backend.organizational-structure.organizations.edit', compact('organizations', 'categories', 'fields'));
     }
 }
