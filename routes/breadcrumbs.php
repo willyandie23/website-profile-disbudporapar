@@ -17,9 +17,9 @@ Breadcrumbs::for('banner.create', function (BreadcrumbTrail $trail) {
     $trail->parent('banner.index');
     $trail->push('Tambah Banner', route('banner.create'));
 });
-Breadcrumbs::for('banner.edit', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('banner.edit', function (BreadcrumbTrail $trail, $bannerId) {
     $trail->parent('banner.index');
-    $trail->push('Edit anner', route('banner.edit'));
+    $trail->push('Edit Banner', route('banner.edit', $bannerId));
 });
 
 // Download breadcrumbs
@@ -41,9 +41,9 @@ Breadcrumbs::for('gallery.create', function (BreadcrumbTrail $trail) {
     $trail->parent('gallery.index');
     $trail->push('Tambah Galeri', route('gallery.create'));
 });
-Breadcrumbs::for('gallery.edit', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('gallery.edit', function (BreadcrumbTrail $trail, $galleryId) {
     $trail->parent('gallery.index');
-    $trail->push('Edit Galeri', route('gallery.edit'));
+    $trail->push('Edit Galeri', route('gallery.edit', $galleryId));
 });
 
 // Identity breadcrumbs
@@ -61,9 +61,9 @@ Breadcrumbs::for('news.create', function (BreadcrumbTrail $trail) {
     $trail->parent('news.index');
     $trail->push('Tambah Berita', route('news.create'));
 });
-Breadcrumbs::for('news.edit', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('news.edit', function (BreadcrumbTrail $trail, $newsId) {
     $trail->parent('news.index');
-    $trail->push('Edit Berita', route('news.edit'));
+    $trail->push('Edit Berita', route('news.edit', $newsId));
 });
 
 // Category breadcrumbs
@@ -75,9 +75,9 @@ Breadcrumbs::for('category.create', function (BreadcrumbTrail $trail) {
     $trail->parent('category.index');
     $trail->push('Tambah Kategori', route('category.create'));
 });
-Breadcrumbs::for('category.edit', function (BreadcrumbTrail $trail) {
+Breadcrumbs::for('category.edit', function (BreadcrumbTrail $trail, $categoryId) {
     $trail->parent('category.index');
-    $trail->push('Edit Kategori', route('category.edit'));
+    $trail->push('Edit Kategori', route('category.edit', $categoryId));
 });
 
 // Field breadcrumbs
@@ -86,12 +86,12 @@ Breadcrumbs::for('field.index', function (BreadcrumbTrail $trail) {
     $trail->push('Bidang Kantor', route('field.index'));
 });
 Breadcrumbs::for('field.create', function (BreadcrumbTrail $trail) {
-    $trail->parent('organizations.index');
-    $trail->push('Bidang Kantor', route('field.create'));
+    $trail->parent('field.index');
+    $trail->push('Tambah Bidang Kantor', route('field.create'));
 });
-Breadcrumbs::for('field.edit', function (BreadcrumbTrail $trail) {
-    $trail->parent('organizations.index');
-    $trail->push('Bidang Kantor', route('field.edit'));
+Breadcrumbs::for('field.edit', function (BreadcrumbTrail $trail, $fieldId) {
+    $trail->parent('field.index');
+    $trail->push('Edit Bidang Kantor', route('field.edit', $fieldId));
 });
 
 // Organizations breadcrumbs

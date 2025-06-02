@@ -3,19 +3,18 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\API\NewsController;
+use App\Http\Controllers\API\FieldController;
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DownloadController;
-use App\Http\Controllers\API\FieldController;
 use App\Http\Controllers\API\IdentityController;
+use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [MainController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
