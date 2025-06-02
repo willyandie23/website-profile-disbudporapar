@@ -7,7 +7,7 @@
         <div class="col-md-6 col-xl-12">
             <div class="card">
                 <div class="card-body">
-                    <form id="identityForm" method="POST" action="{{ route('identity.store') }}" enctype="multipart/form-data">
+                    <form id="identityForm" method="POST" action="{{ route('identity.store') }}">
 
                         @csrf
                         {{-- Section Generan Section --}}
@@ -21,17 +21,12 @@
                                 <div class="form-group mb-3">
                                     <label for="site_logo">Logo Website</label>
                                     <input type="file" class="form-control" id="site_logo" name="site_logo">
-                                    <p class="mt-2">Preview:</p>
-                                    <img id="site_logo_preview" src="" alt="Logo Preview"
-                                        style="display:none; max-width: 250px;" />
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
-                                    <label for="site_favicon">Favicon Website</label>
-                                    <input type="file" class="form-control" id="site_favicon" name="site_favicon">
                                     <p class="mt-2">Preview:</p>
-                                    <img id="site_favicon_preview" src="" alt="Favicon Preview"
+                                    <img id="site_logo_preview" src="" alt="Logo Preview"
                                         style="display:none; max-width: 250px;" />
                                 </div>
                             </div>
@@ -82,137 +77,103 @@
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-
                 </div>
             </div>
         </div>
-    </div>
-@endsection
+    @endsection
 
-@push('scripts')
-    <script>
-        $(document).ready(function() {
-            const form = $('#identityForm');
-            const siteHeadingInput = $('#site_heading');
-            const siteLogoInput = $('#site_logo')[0];
-            const siteFaviconInput = $('#site_favicon')[0];
-            const contactAddressInput = $('#cp_address');
-            const contactPhoneInput = $('#cp_phone');
-            const contactEmailInput = $('#cp_email');
-            const contactAgencyInput = $('#cp_agency');
-            const socialFacebookInput = $('#sm_facebook');
-            const socialInstagramInput = $('#sm_instagram');
-            const socialXInput = $('#sm_x');
-            const socialYoutubeInput = $('#sm_youtube');
+    @push('scripts')
+        <script>
+            $(document).ready(function() {
+                const form = $('#identityForm');
+                const siteHeadingInput = $('#site_heading');
+                const siteLogoInput = $('#site_logo')[0];
 
-            // Fetch existing data
-            $.ajax({
-                url: '/api/identities',
-                type: 'GET',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${token}`
-                },
-                success: function(response) {
-                    if (response.success && response.data) {
-                        siteHeadingInput.val(response.data.site_heading || '');
-                        if (response.data.site_logo) {
-                            $('#site_logo_preview').attr('src', response.data.site_logo).show();
-                        }
-                        if (response.data.site_favicon) {
-                            $('#site_favicon_preview').attr('src', response.data.site_favicon).show();
-                        }
-                        contactAddressInput.val(response.data.cp_address || '');
-                        contactPhoneInput.val(response.data.cp_phone || '');
-                        contactEmailInput.val(response.data.cp_email || '');
-                        contactAgencyInput.val(response.data.cp_agency || '');
-                        socialFacebookInput.val(response.data.sm_facebook || '');
-                        socialInstagramInput.val(response.data.sm_instagram || '');
-                        socialXInput.val(response.data.sm_x || '');
-                        socialYoutubeInput.val(response.data.sm_youtube || '');
-                    }
-                },
-                error: function(xhr) {
-                    console.error('Error fetching identity data:', xhr.responseText);
-                    Swal.fire('Error!', 'Failed to load identity data.', 'error');
-                }
-            });
+                const contactAddressInput = $('#cp_address');
+                const contactPhoneInput = $('#cp_phone');
+                const contactEmailInput = $('#cp_email');
+                const contactAgencyInput = $('#cp_agency');
 
-            // Handle form submission
-            form.on('submit', function(event) {
-                event.preventDefault();
-                const formData = new FormData();
-                formData.append('_token', '{{ csrf_token() }}');
-                formData.append('site_heading', siteHeadingInput.val());
-                formData.append('cp_address', contactAddressInput.val());
-                formData.append('cp_phone', contactPhoneInput.val());
-                formData.append('cp_email', contactEmailInput.val());
-                formData.append('cp_agency', contactAgencyInput.val());
-                formData.append('sm_facebook', socialFacebookInput.val());
-                formData.append('sm_instagram', socialInstagramInput.val());
-                formData.append('sm_x', socialXInput.val());
-                formData.append('sm_youtube', socialYoutubeInput.val());
+                const socialFacebookInput = $('#sm_facebook');
+                const socialInstagramInput = $('#sm_instagram');
+                const socialXInput = $('#sm_x');
+                const socialYoutubeInput = $('#sm_youtube');
 
-                if (siteLogoInput && siteLogoInput.files && siteLogoInput.files[0]) {
-                    console.log('Logo selected:', siteLogoInput.files[0].name, siteLogoInput.files[0].type);
-                    formData.append('site_logo', siteLogoInput.files[0]);
-                }
-                if (siteFaviconInput && siteFaviconInput.files && siteFaviconInput.files[0]) {
-                    console.log('Favicon selected:', siteFaviconInput.files[0].name, siteFaviconInput.files[
-                        0].type);
-                    formData.append('site_favicon', siteFaviconInput.files[0]);
-                } else {
-                    console.log('No favicon selected');
-                }
-
-                // Log FormData contents
-                for (let pair of formData.entries()) {
-                    console.log(pair[0] + ': ' + pair[1]);
-                }
-
+                // Mengambil data saat load page
                 $.ajax({
                     url: '/api/identities',
-                    type: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${token}`
-                    },
-                    data: formData,
-                    processData: false,
-                    contentType: false,
+                    type: 'GET',
                     success: function(response) {
-                        Swal.fire({
-                            title: 'Success!',
-                            text: 'Identitas Website Berhasil Disimpan',
-                            icon: 'success',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            window.location.reload();
-                        });
+                        if (response.success && response.data) {
+                            siteHeadingInput.val(response.data.site_heading || '');
+
+                            // Menampilkan gambar jika ada
+                            if (response.data.site_logo) {
+                                $('#site_logo_preview').attr('src', response.data.site_logo).show();
+                            }
+
+                            contactAddressInput.val(response.data.cp_address || '');
+                            contactPhoneInput.val(response.data.cp_phone || '');
+                            contactEmailInput.val(response.data.cp_email || '');
+                            contactAgencyInput.val(response.data.cp_agency || '');
+
+                            socialFacebookInput.val(response.data.sm_facebook || '');
+                            socialInstagramInput.val(response.data.sm_instagram || '');
+                            socialXInput.val(response.data.sm_x || '');
+                            socialYoutubeInput.val(response.data.sm_youtube || '');
+                        }
                     },
                     error: function(xhr) {
-                        console.error('Error saving identity data:', xhr.responseText);
-                        let errorMessage = 'Failed to save identity data.';
-                        if (xhr.responseJSON && xhr.responseJSON.message) {
-                            errorMessage = xhr.responseJSON.message;
-                            if (xhr.responseJSON.errors) {
-                                errorMessage += '<ul>';
-                                for (let field in xhr.responseJSON.errors) {
-                                    errorMessage +=
-                                        `<li>${xhr.responseJSON.errors[field].join(', ')}</li>`;
-                                }
-                                errorMessage += '</ul>';
-                            }
-                        }
-                        Swal.fire({
-                            title: 'Error!',
-                            html: errorMessage,
-                            icon: 'error'
-                        });
+                        console.error('Error fetching identity data:', xhr.responseText);
+                        Swal.fire('Error!', 'Failed to load identity data.', 'error');
                     }
                 });
+
+                // Handle form submission
+                form.on('submit', function(event) {
+                    event.preventDefault();
+
+                    const formData = new FormData(); // Gunakan FormData untuk file upload
+
+                    formData.append('site_heading', siteHeadingInput.val());
+                    formData.append('cp_address', contactAddressInput.val());
+                    formData.append('cp_phone', contactPhoneInput.val());
+                    formData.append('cp_email', contactEmailInput.val());
+                    formData.append('cp_agency', contactAgencyInput.val());
+                    formData.append('sm_facebook', socialFacebookInput.val());
+                    formData.append('sm_instagram', socialInstagramInput.val());
+                    formData.append('sm_x', socialXInput.val());
+                    formData.append('sm_youtube', socialYoutubeInput.val());
+
+                    if (siteLogoInput && siteLogoInput.files && siteLogoInput.files[0]) {
+                        formData.append('site_logo', siteLogoInput.files[0]);
+                    }
+
+                    $.ajax({
+                        url: '/api/identities',
+                        type: 'POST',
+                        data: formData,
+                        processData: false, // Jangan biarkan jQuery mengubah data
+                        contentType: false, // Jangan tentukan contentType, biarkan FormData menangani
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                        success: function(response) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Identitas Website Berhasil Disimpan',
+                                icon: 'success',
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                window.location.reload();
+                            });
+                        },
+                        error: function(xhr) {
+                            console.error('Error saving identity data:', xhr.responseText);
+                            Swal.fire('Error!', 'Failed to save identity data.', 'error');
+                        }
+                    });
+                });
             });
-        });
-    </script>
-@endpush
+        </script>
+    @endpush

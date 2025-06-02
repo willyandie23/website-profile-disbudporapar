@@ -93,3 +93,13 @@ Breadcrumbs::for('organizations.edit', function (BreadcrumbTrail $trail, $organi
     $trail->parent('organizations.index');
     $trail->push('Edit Organisasi', route('organizations.edit', $organizationId));
 });
+
+// logs breadcrumbs
+Breadcrumbs::for('logs.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Daftar Log', route('logs.index'));
+});
+Breadcrumbs::for('logs.show', function (BreadcrumbTrail $trail, $logsId) {
+    $trail->parent('logs.index');
+    $trail->push('Log Detail', route('logs.show', $logsId));
+});

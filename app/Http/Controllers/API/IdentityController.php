@@ -5,7 +5,6 @@ namespace App\Http\Controllers\API;
 use App\Models\Identity;
 use Illuminate\Http\Request;
 use App\Classes\ApiResponseClass;
-use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 
@@ -120,11 +119,12 @@ class IdentityController extends Controller
         $validatedData = $request->validate([
             'site_heading' => 'nullable|string|max:255',
             'site_logo' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
-            'site_favicon' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg,ico|max:2048',
+
             'cp_address' => 'nullable|string',
             'cp_phone' => 'nullable|string',
             'cp_email' => 'nullable|string',
             'cp_agency' => 'nullable|string',
+            
             'sm_facebook' => 'nullable|string',
             'sm_instagram' => 'nullable|string',
             'sm_x' => 'nullable|string',
@@ -132,55 +132,28 @@ class IdentityController extends Controller
         ]);
 
         try {
-            // Handle logo upload
+            // Menyimpan logo website
             if ($request->hasFile('site_logo')) {
                 $logoPath = $request->file('site_logo')->store('logo', 'public');
-                Log::info('Logo stored', ['path' => $logoPath]);
                 $validatedData['site_logo'] = Storage::url($logoPath);
             }
 
-            // Handle favicon upload
-            if ($request->hasFile('site_favicon')) {
-                $favicon = $request->file('site_favicon');
-                Log::info('Favicon file detected', [
-                    'file' => $favicon->getClientOriginalName(),
-                    'size' => $favicon->getSize(),
-                    'mime' => $favicon->getMimeType()
-                ]);
-                if ($favicon->isValid()) {
-                    $faviconPath = $favicon->store('favicon', 'public');
-                    Log::info('Favicon stored', ['path' => $faviconPath]);
-                    $validatedData['site_favicon'] = Storage::url($faviconPath);
-                } else {
-                    Log::error('Invalid favicon file', ['error' => $favicon->getErrorMessage()]);
-                    return response()->json(['message' => 'Invalid favicon file', 'error' => $favicon->getErrorMessage()], 422);
-                }
-            }
-
-            Log::info('Validated data before saving:', $validatedData);
-
-            // Save or update identities
+            // Simpan atau update pengaturan
             foreach ($validatedData as $key => $value) {
-                Identity::updateOrCreate(
+                $identities = Identity::updateOrCreate(
                     ['key' => $key],
                     ['value' => $value]
                 );
             }
 
-            // Verify favicon in database
-            $faviconRecord = Identity::where('key', 'site_favicon')->first();
-            Log::info('Favicon record in DB:', ['record' => $faviconRecord]);
-
             return response()->json([
                 'message' => 'Identity created successfully',
-                'Identity' => $validatedData
+                'Identity' => $identities
             ], 201);
         } catch (\Exception $e) {
-            Log::error('Failed to create Identity', ['error' => $e->getMessage()]);
             return response()->json(['message' => 'Failed to create Identity', 'error' => $e->getMessage()], 500);
         }
     }
-
 
     /**
      * @OA\Get(
