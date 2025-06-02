@@ -17,10 +17,11 @@ use Illuminate\Support\Facades\Storage;
  *     @OA\Property(property="id", type="integer", example=1),
  *     @OA\Property(property="name", type="string", example="John Doe"),
  *     @OA\Property(property="position", type="string", example="Kepala Dinas"),
- *     @OA\Property(property="cateogry_id", type="string", example="Kepala Dinas"),
+ *     @OA\Property(property="NIP", type="string", example="11111111 123456 1 123"),
  *     @OA\Property(property="created_at", type="string", format="date-time"),
  *     @OA\Property(property="updated_at", type="string", format="date-time"),
- *     @OA\Property(property="image", type="string", example="dummy.jpg")
+ *     @OA\Property(property="image", type="string", example="dummy.jpg"),
+ *     @OA\Property(property="field_id", type="string", example="Bagian Sekretariat")
  * )
  */
 class OrganizationController extends Controller
@@ -54,7 +55,7 @@ class OrganizationController extends Controller
     public function index()
     {
         try {
-            $organizations = Organization::with('category')->orderBy('id', 'asc')->get();
+            $organizations = Organization::with('field')->orderBy('id', 'asc')->get();
 
             return ApiResponseClass::success(
                 $organizations,
@@ -80,7 +81,9 @@ class OrganizationController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="name", type="string"),
      *             @OA\Property(property="position", type="string"),
-     *             @OA\Property(property="category_id", type="integer"),
+     *             @OA\Property(property="NIP", type="string"),
+     *             @OA\Property(property="field_id", type="integer"),
+     *             @OA\Property(property="image", type="string"),
      *         )
      *     ),
      *     @OA\Response(
@@ -91,8 +94,12 @@ class OrganizationController extends Controller
      *             @OA\Property(
      *                 property="organization",
      *                 type="object",
-     *                 @OA\Property(property="name", type="string", example="name_value"),
-     *                 @OA\Property(property="position", type="string", example="position_value")
+     *                @OA\Property(property="id", type="integer", example=1),
+     *                @OA\Property(property="name", type="string", example="John Doe"),
+     *                @OA\Property(property="position", type="string", example="Kepala Dinas"),
+     *                @OA\Property(property="NIP", type="string", example="11111111 123456 1 123"),
+     *                @OA\Property(property="image", type="string", example="dummy.jpg"),
+     *                @OA\Property(property="field_id", type="string", example="Bagian Sekretariat")
      *             )
      *         )
      *     ),
@@ -135,7 +142,7 @@ class OrganizationController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'NIP' => 'required|string|max:255',
             'field_id' => 'required|exists:fields,id',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);
@@ -146,7 +153,7 @@ class OrganizationController extends Controller
             $organization = Organization::create([
                 'name' => $request->name,
                 'position' => $request->position,
-                'category_id' => $request->category_id,
+                'NIP' => $request->NIP,
                 'field_id' => $request->field_id,
                 'image' => Storage::url($imagePath)
             ]);
@@ -183,12 +190,7 @@ class OrganizationController extends Controller
      *             @OA\Property(property="id", type="integer", example=1),
      *             @OA\Property(property="name", type="string", example="Example Organization"),
      *             @OA\Property(property="position", type="string", example="Example position"),
-     *             @OA\Property(
-     *                 property="category", 
-     *                 type="object",
-     *                 @OA\Property(property="id", type="integer", example=1),
-     *                 @OA\Property(property="name", type="string", example="Example Category")
-     *             ),
+     *             @OA\Property(property="NIP", type="string", example="11111111 123456 1 123"),
      *             @OA\Property(
      *                 property="field", 
      *                 type="object",
@@ -219,7 +221,7 @@ class OrganizationController extends Controller
     public function show($id)
     {
         try {
-            $organizations = Organization::with('category')->find($id);
+            $organizations = Organization::with('field')->find($id);
 
             if (!$organizations) {
                 return response()->json(['message' => 'Organization not found'], 404);
@@ -250,7 +252,7 @@ class OrganizationController extends Controller
      *         @OA\JsonContent(
      *             @OA\Property(property="name", type="string"),
      *             @OA\Property(property="position", type="string"),
-     *             @OA\Property(property="category_id", type="integer"),
+     *             @OA\Property(property="NIP", type="string"),
      *             @OA\Property(property="field_id", type="integer"),
      *             @OA\Property(property="image", type="string"),
      *         )
@@ -263,11 +265,17 @@ class OrganizationController extends Controller
      *             @OA\Property(
      *                 property="organization",
      *                 type="object",
-     *                 @OA\Property(property="name", type="string", example="name_updated"),
-     *                 @OA\Property(property="position", type="string", example="position_updated"),
-     *                 @OA\Property(property="category_id", type="integer", example=1),
-     *                 @OA\Property(property="field_id", type="integer", example=1),
-     *                 @OA\Property(property="image", type="string", example="image_updated"),
+     *             @OA\Property(property="id", type="integer", example=1),
+     *             @OA\Property(property="name", type="string", example="Example Organization"),
+     *             @OA\Property(property="position", type="string", example="Example position"),
+     *             @OA\Property(property="NIP", type="string", example="11111111 123456 1 123"),
+     *             @OA\Property(
+     *                 property="field", 
+     *                 type="object",
+     *                 @OA\Property(property="id", type="integer", example=1),
+     *                 @OA\Property(property="name", type="string", example="Example Field")
+     *             ),
+     *             @OA\Property(property="image", type="string", example="Example Image")
      *             )
      *         )
      *     ),
@@ -311,7 +319,7 @@ class OrganizationController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'position' => 'required|string|max:255',
-            'category_id' => 'required|exists:categories,id',
+            'NIP' => 'required|string|max:255',
             'field_id' => 'required|exists:fields,id'
         ]);
 
@@ -334,7 +342,7 @@ class OrganizationController extends Controller
             $organizations->update([
                 'name' => $request->name,
                 'position' => $request->position,
-                'category_id' => $request->category_id,
+                'NIP' => $request->NIP,
                 'field_id' => $request->field_id,
             ]);
 
@@ -408,7 +416,8 @@ class OrganizationController extends Controller
     // Method untuk view (non-API)
     public function organizationShow()
     {
-        return view('backend.organizational-structure.organizations.index');
+        $field = Field::all();
+        return view('backend.organizational-structure.organizations.index', compact('field'));
     }
 
     public function create()

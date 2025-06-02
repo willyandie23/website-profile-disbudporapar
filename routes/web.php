@@ -36,11 +36,6 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
     Route::get('/organizational-structure/organizations/create', [OrganizationController::class, 'create'])->name('organizations.create');
     Route::get('/organizational-structure/organizations/{organizations}/edit', [OrganizationController::class, 'edit'])->name('organizations.edit');
     Route::post('/organizational-structure/organizations', [OrganizationController::class, 'store'])->name('organizations.store');
-
-    Route::get('/organizational-structure/category', [CategoryController::class, 'organizationCategoriesShow'])->name('category.index');
-    Route::get('/organizational-structure/category/create', [CategoryController::class, 'create'])->name('category.create');
-    Route::get('/organizational-structure/category/{category}/edit', [CategoryController::class, 'edit'])->name('category.edit');
-    Route::post('/organizational-structure/category', [CategoryController::class, 'store'])->name('category.store');
     
     Route::get('/organizational-structure/fields', [FieldController::class, 'fieldShow'])->name('field.index');
     Route::get('/organizational-structure/fields/create', [FieldController::class, 'create'])->name('field.create');

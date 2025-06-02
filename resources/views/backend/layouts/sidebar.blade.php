@@ -70,11 +70,6 @@
                     </a>
                     <ul class="pc-submenu">
                         <li class="pc-item">
-                            <a class="pc-link" href="{{ route('category.index') }}">
-                                Kategori
-                            </a>
-                        </li>
-                        <li class="pc-item">
                             <a class="pc-link" href="{{ route('organizations.index') }}">
                                 Daftar Anggota
                             </a>

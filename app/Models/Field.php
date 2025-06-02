@@ -15,4 +15,9 @@ class Field extends Model
         'name',
         'description'
     ];
+
+    public function organizations()
+    {
+        return $this->hasMany(Organization::class, 'field_id');
+    }
 }

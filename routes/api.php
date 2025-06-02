@@ -20,7 +20,6 @@ Route::post('login', [App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('logout', [App\Http\Controllers\Api\AuthController::class, 'logout'])->middleware('auth:api');
 Route::resource('app-logs', AppLogController::class, ['only' => ['index', 'show']]);
 Route::get('/organizations', [OrganizationController::class, 'index']);
-Route::get('/categories', [CategoryController::class, 'index']);
 Route::get('/banner', [BannerController::class, 'index']);
 Route::get('/galery', [GaleryController::class, 'index']);
 Route::get('/news', [NewsController::class, 'index']);
@@ -38,11 +37,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/organizations/{id}', [OrganizationController::class, 'show']);
     Route::put('/organizations/{id}', [OrganizationController::class, 'update']);
     Route::delete('/organizations/{id}', [OrganizationController::class, 'destroy']);
-
-    Route::post('/categories', [CategoryController::class, 'store']);
-    Route::get('/categories/{id}', [CategoryController::class, 'show']);
-    Route::put('/categories/{id}', [CategoryController::class, 'update']);
-    Route::delete('/categories/{id}', [CategoryController::class, 'destroy']);
     
     Route::post('/galery', [GaleryController::class, 'store']);
     Route::get('/galery/{id}', [GaleryController::class, 'show']);

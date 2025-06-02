@@ -53,7 +53,7 @@
 
         @if ($navbar)
             <!-- Navbar -->
-            @include('frontend.layouts.navbar')
+            @include('frontend.layouts.footer')
         @endif
         
         <!-- Copyright Start -->

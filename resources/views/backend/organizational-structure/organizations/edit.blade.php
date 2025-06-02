@@ -10,34 +10,23 @@
                 <div class="card-body">
                     <form id="organizationForm">
                         <div class="form-group">
-                            <label for="name">Perangkat Daerah</label>
+                            <label for="name">Nama</label>
                             <input type="text" class="form-control" id="name" name="name"
                                 value="{{ $organizations->name }}" required>
                         </div>
                         <div class="form-group">
-                            <label for="position">Perangkat Daerah</label>
+                            <label for="position">Posisi</label>
                             <input type="text" class="form-control" id="position" name="position"
                                 value="{{ $organizations->position }}" required>
                         </div>
-
-                        <!-- Category Dropdown -->
                         <div class="form-group">
-                            <label for="category_id">Kategori</label>
-                            <select class="form-control" id="category_id" name="category_id" required>
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}"
-                                        @if ($organizations->category_id == $category->id) 
-                                            selected 
-                                        @endif>
-                                        {{ $category->name }}
-                                    </option>
-                                @endforeach
-                            </select>
+                            <label for="NIP">NIP</label>
+                            <input type="text" class="form-control" id="NIP" name="NIP"
+                                value="{{ $organizations->NIP }}" required>
                         </div>
                         
                         <div class="form-group">
-                            <label for="field_id">Kategori</label>
+                            <label for="field_id">Bidang</label>
                             <select class="form-control" id="field_id" name="field_id" required>
                                 <option value="">Pilih Kategori</option>
                                 @foreach ($fields as $field)
@@ -75,19 +64,19 @@
         document.getElementById('organizationForm').addEventListener('submit', async function(e) {
             e.preventDefault();
 
-            const fileInput    = document.getElementById('image');
-            const name        = document.getElementById('name').value;
-            const position        = document.getElementById('position').value;
-            const category_id        = document.getElementById('category_id').value;
-            const field_id        = document.getElementById('field_id').value;;
-            const apiUrl       = `/api/organizations/{{ $organizations->id }}`;
+            const fileInput  = document.getElementById('image');
+            const name       = document.getElementById('name').value;
+            const position   = document.getElementById('position').value;
+            const nip        = document.getElementById('NIP').value;
+            const field_id   = document.getElementById('field_id').value;;
+            const apiUrl     = `/api/organizations/{{ $organizations->id }}`;
 
             if (fileInput.files.length) {
                 const fd = new FormData();
                 fd.append('_method', 'PUT');
                 fd.append('name', name);
                 fd.append('position', position);
-                fd.append('category_id', category_id);
+                fd.append('NIP', nip);
                 fd.append('field_id', field_id);
                 fd.append('image', fileInput.files[0]);
 
@@ -103,12 +92,17 @@
                 return handleResponse(res);
             }
 
-            const payload = { title, description };
+            const payload = {
+                name: name,
+                position: position,
+                NIP: nip,
+                field_id: field_id
+            };
             const res = await fetch(apiUrl, {
                 method: 'PUT',
                 headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
                 },
                 body: JSON.stringify(payload)
             });

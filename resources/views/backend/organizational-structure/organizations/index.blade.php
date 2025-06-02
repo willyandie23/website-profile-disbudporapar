@@ -66,15 +66,15 @@
                         data: 'position'
                     },
                     {
-                        data: 'category.name',
+                        data: 'NIP',
                         render: function(data) {
-                            return data ? data : 'Tidak Ada Kategori';
+                            return data ? data : 'Tidak Ada NIP';
                         }
                     },
                     {
                         data: 'field.name',
                         render: function(data) {
-                            return data ? data : 'Tidak Ada Kategori';
+                            return data ? data : 'Tidak Ada Bidang';
                         }
                     },
                     {

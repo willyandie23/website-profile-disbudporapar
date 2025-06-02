@@ -20,13 +20,8 @@
                             <input type="text" class="form-control" id="position" name="position" required>
                         </div>
                         <div class="form-group">
-                            <label for="category_id">Kategori</label>
-                            <select class="form-control" id="category_id" name="category_id" required>
-                                <option value="">Pilih Kategori</option>
-                                @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
-                                @endforeach
-                            </select>
+                            <label for="NIP">NIP</label>
+                            <input type="text" class="form-control" id="NIP" name="NIP" required>
                         </div>
                         <div class="form-group">
                             <label for="field_id">Bidang</label>
