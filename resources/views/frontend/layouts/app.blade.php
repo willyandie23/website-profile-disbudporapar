@@ -8,11 +8,14 @@
         <meta content="" name="keywords">
         <meta content="" name="description">
 
+        <!-- Favicon -->
+        <link rel="icon" id="site_favicon" href="" type="image/x-icon">
+
         <!-- Google Web Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wdth,wght@0,75..100,300..800;1,75..100,300..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet"> 
-
+        
         <!-- Icon Font Stylesheet -->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
@@ -23,7 +26,6 @@
 
 
         <!-- Customized Bootstrap Stylesheet -->
-        {{-- <link href="css/bootstrap.min.css" rel="stylesheet"> --}}
         <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
         @stack('css')
 
@@ -102,10 +104,22 @@
                 url: '/api/identities',
                 type: 'GET',
                 success: function(response) {
+                    console.log('API Response:', response);
                     if (response.success && response.data) {
+                        if (response.data.site_favicon) {
+                            $('#site_favicon').attr('href', response.data.site_favicon);
+                            console.log('Favicon set to:', response.data.site_favicon);
+                        } else {
+                            console.log('No favicon in response');
+                        }
                         if (response.data.site_logo) {
                             $('#site_logo').attr('src', response.data.site_logo).show();
+                            console.log('Logo set to:', response.data.site_logo);
+                        } else {
+                            console.log('No logo in response');
                         }
+                    } else {
+                        console.log('Invalid response format:', response);
                     }
                 },
                 error: function(xhr) {
