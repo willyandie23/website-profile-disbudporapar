@@ -67,9 +67,9 @@
         <div class="footer-wrapper container-fluid">
             <div class="row">
                 <div class="col-sm my-1">
-                    {{-- <p class="m-0">e-SKM ♥ dibuat oleh<a href="https://diskominfopersantik.katingankab.go.id/"
+                    <p class="m-0">Website Profile Disbudporapar Dibuat dengan ♥ oleh<a href="https://diskominfopersantik.katingankab.go.id/"
                             target="_blank"> <b>Diskominfostandi Kab. Katingan</b></a> Dikelola oleh <a
-                            href=""><b>Setda Bagian Organisasi Kab. Katingan</b></a>.</p> --}}
+                            href=""><b>Disbudporapar Kab. Katingan</b></a>.</p>
                 </div>
             </div>
         </div>
@@ -83,7 +83,6 @@
     <script src="{{ asset('assets/js/pcoded.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/feather.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    {{-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> --}}
     
     <!--Datatables -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -94,30 +93,7 @@
         const token = "{{ session('api_token') }}";
         console.log('API token:', token);
     </script>
-    {{-- <script src="{{ asset('js/notification.js') }}"></script> --}}
     @stack('scripts')
 </body>
 
 </html>
-
-@push('scripts')
-    <script>
-        // $(document).ready(function() {
-        //     $.ajax({
-        //         url: '/api/identities',
-        //         type: 'GET',
-        //         success: function(response) {
-        //             if (response.success && response.data) {
-        //                 if (response.data.site_pavicon) {
-        //                     $('#site_pavicon').attr('href', response.data.site_pavicon).show();
-        //                 }
-        //             }
-        //         },
-        //         error: function(xhr) {
-        //             console.error('Error fetching Identities data:', xhr.responseText);
-        //             Swal.fire('Error!', 'Failed to load Identities data.', 'error');
-        //         }
-        //     });
-        // });
-    </script>
-@endpush

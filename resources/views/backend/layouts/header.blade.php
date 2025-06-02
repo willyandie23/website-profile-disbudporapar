@@ -17,31 +17,6 @@
         <div class="ms-auto">
             <ul class="list-unstyled">
                 <li class="dropdown pc-h-item">
-                    {{-- <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"
-                        role="button" aria-haspopup="false" aria-expanded="false" id="total">
-                        <i class="ti ti-mail"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-notification dropdown-menu-end pc-h-dropdown">
-                        <div class="dropdown-header d-flex align-items-center justify-content-between">
-                            <h5 class="m-0" id="total_text">Notifikasi 
-                            </h5>
-                            <a href="#!" class="pc-head-link bg-transparent"><i
-                                    class="ti ti-x text-danger"></i></a>
-                        </div>
-                        <div class="dropdown-divider"></div>
-                        <div class="dropdown-header px-0 text-wrap header-notification-scroll position-relative"
-                            style="max-height: calc(100vh - 215px); overflow-y: auto;">
-                            <div class="list-group list-group-flush w-100" id="notification_list">
-                            </div>
-                        </div>
-                        <div class="text-center" id="div_zero_notification">
-                            <p>Tidak ada notifikasi</p>
-                        </div>
-                        <div class="dropdown-divider" id="divider" style="display:none"></div>
-                        <div class="text-center py-2" id="div_mark_all_read" style="display:none">
-                            <a href="#!" class="link-primary" id="mark-all-read">Tandai Semua Sudah Dibaca</a>
-                        </div>
-                    </div> --}}
                 </li>
                 <li class="dropdown pc-h-item header-user-profile">
                     <a class="pc-head-link dropdown-toggle arrow-none me-0" data-bs-toggle="dropdown" href="#"

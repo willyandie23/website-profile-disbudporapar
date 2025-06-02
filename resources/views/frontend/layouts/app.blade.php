@@ -96,6 +96,25 @@
     <!-- Template Javascript -->
     {{-- <script src="js/main.js"></script> --}}
     <script src="{{ asset('frontend/js/main.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/api/identities',
+                type: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        if (response.data.site_logo) {
+                            $('#site_logo').attr('src', response.data.site_logo).show();
+                        }
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error fetching Identities data:', xhr.responseText);
+                    Swal.fire('Error!', 'Failed to load Identities data.', 'error');
+                }
+            });
+        });
+    </script>
     @stack('scripts')    
     </body>
 

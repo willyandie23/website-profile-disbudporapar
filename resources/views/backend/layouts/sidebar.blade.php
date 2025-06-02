@@ -2,8 +2,7 @@
     <div class="navbar-wrapper">
         <div class="m-header">
             <a href="{{ url('/dashboard') }}" class="b-brand text-primary">
-                <img src="{{ asset('assets/images/logo-dark.svg') }}" class="img-fluid logo-lg" alt="logo">
-                {{-- <img src="{{ asset('frontend/img/logo3.png') }}" alt="Logo" style="height: 50px;"> --}}
+                <img src="" id="site_logo" alt="Logo" style="height: 75px;">
             </a>
         </div>
         <div class="navbar-content">
@@ -97,3 +96,25 @@
         </div>
     </div>
 </nav>
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/api/identities',
+                type: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        if (response.data.site_logo) {
+                            $('#site_logo').attr('src', response.data.site_logo).show();
+                        }
+                    }
+                },
+                error: function(xhr) {
+                    console.error('Error fetching Identities data:', xhr.responseText);
+                    Swal.fire('Error!', 'Failed to load Identities data.', 'error');
+                }
+            });
+        });
+    </script>
+@endpush
