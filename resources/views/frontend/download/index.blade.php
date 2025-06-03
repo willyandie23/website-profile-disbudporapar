@@ -59,7 +59,7 @@
         }
 
         .table tbody tr td {
-            font-size: 18px;
+            font-size: 14px;
         }
 
         /* Mengubah warna tombol download */
@@ -68,7 +68,7 @@
             border-color: #4caf50;
             transition: background-color 0.3s ease;
             color: white; /* Warna teks putih */
-            font-size: large;
+            font-size: medium;
         }
 
         .btn-info:hover {

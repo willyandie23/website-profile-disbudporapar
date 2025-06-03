@@ -11,6 +11,11 @@
                     <form id="uploadForm" enctype="multipart/form-data">
                         @csrf
                         <div class="form-group">
+                            <label for="file_name">Nama File</label>
+                            <input type="text" name="file_name" id="file_name" class="form-control" required>
+                        </div>
+
+                        <div class="form-group">
                             <label for="file">Pilih File PDF</label>
                             <input type="file" name="file" id="file" class="form-control" required>
                         </div>

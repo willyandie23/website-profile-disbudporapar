@@ -10,15 +10,11 @@ class DownloadController extends Controller
 {
     public function index()
     {
-        // Mengambil semua data file yang dapat diunduh
-        $downloads = Download::orderBy('id', 'asc')->get();
-
-        return view('frontend.download.index', compact('downloads'))
-            ->with([
-                'submenu' => false,
-                'navbar' => true,
-                'footer' => true
-            ]);
+        return view('frontend.download.index', [
+            'submenu' => false,
+            'navbar' => true,
+            'footer' => true
+        ]);
     }
 
     public function incrementDownload($id)

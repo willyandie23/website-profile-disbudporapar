@@ -53,7 +53,7 @@ class DownloadController extends Controller
     public function index()
     {
         try {
-            $downloads = Download::orderBy('id', 'asc')->get();
+            $downloads = Download::orderBy('id', 'desc')->get();
             return ApiResponseClass::success($downloads, "Download retrieved successfully");
         } catch (\Throwable $e) {
             return ApiResponseClass::errorException($e, "Failed to retrieve Download Data");
@@ -100,15 +100,15 @@ class DownloadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'file_name' => 'required|string|max:255', // Maksimal ukuran 10MB
             'file' => 'required|mimes:pdf|max:10240', // Maksimal ukuran 10MB
         ]);
 
         try {
             $path = $request->file('file')->store('downloads', 'public');
-            $file_name = $request->file('file')->getClientOriginalName();
-
+            
             $downloads = Download::create([
-                'file_name' => $file_name,
+                'file_name' => $request->file_name,
                 'total_download' => 0,
                 'file_path' => Storage::url($path),
             ]);

@@ -54,7 +54,7 @@ class NewsController extends Controller
     public function index()
     {
         try {
-            $news = News::orderBy('id', 'asc')->get();
+            $news = News::orderBy('id', 'desc')->get();
 
             return ApiResponseClass::success(
                 $news,

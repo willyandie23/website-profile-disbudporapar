@@ -23,6 +23,7 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
 
 
 Route::get('/berita', [FrontendNewsController::class, 'index'])->name('berita.index');
+Route::get('/berita/{berita}', [FrontendNewsController::class, 'show'])->name('berita.show');
 Route::get('/unduhan', [FrontendDownloadController::class, 'index'])->name('unduhan.index');
 
 

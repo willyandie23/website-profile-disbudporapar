@@ -127,7 +127,7 @@
                         render: function (data) {
                             return `
                                 <span class="description" data-description="${data}">
-                                    <i class="fas fa-info-circle"></i> Lihat Deskripsi
+                                    <i class="fas fa-info-circle"></i>
                                 </span>`;
                         }
                     },
