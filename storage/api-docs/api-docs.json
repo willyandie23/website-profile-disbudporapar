@@ -713,493 +713,6 @@
                 ]
             }
         },
-        "/api/categories": {
-            "get": {
-                "tags": [
-                    "Organization Categories"
-                ],
-                "summary": "Retrieve a list of Organization Categories",
-                "operationId": "8e17a9627dbed245cf032f867569cf11",
-                "responses": {
-                    "200": {
-                        "description": "Organization Categories retrieved successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "array",
-                                    "items": {
-                                        "$ref": "#/components/schemas/category"
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthorized"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Forbidden"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "post": {
-                "tags": [
-                    "Organization Categories"
-                ],
-                "summary": "Create a new Organization Categories",
-                "description": "Create a new Organization Categories",
-                "operationId": "2140f330d926c3e118cab9391dc4ff42",
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "201": {
-                        "description": "Organization Categories created successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Organization Categories created successfully"
-                                        },
-                                        "agency": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "name_category_value"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "401": {
-                        "description": "Unauthorized - Token invalid or missing",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Unauthenticated."
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "The given data was invalid."
-                                        },
-                                        "errors": {
-                                            "properties": {
-                                                "key": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "The key field is required."
-                                                    }
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Failed to create Organization Categories"
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Database error"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
-        "/api/categories/{id}": {
-            "get": {
-                "tags": [
-                    "Organization Categories"
-                ],
-                "summary": "Retrieve a single Organization Category by ID",
-                "operationId": "6a038665b20191638e1608ea8897bf64",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Organization Category ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Organization Category retrieved successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "id": {
-                                            "type": "integer",
-                                            "example": 1
-                                        },
-                                        "name": {
-                                            "type": "string",
-                                            "example": "Kepala Dinas"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Organization Category not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Organization Category not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Failed to retrieve Organization Category"
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Database error"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "put": {
-                "tags": [
-                    "Organization Categories"
-                ],
-                "summary": "Update an existing Organization Categories",
-                "description": "Update an existing Organization Categories",
-                "operationId": "e4e7aaba2eee4d7e813dea85bf3cf3ed",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "ID of the organization categories to update",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "name": {
-                                        "type": "string"
-                                    }
-                                },
-                                "type": "object"
-                            }
-                        }
-                    }
-                },
-                "responses": {
-                    "200": {
-                        "description": "Organization categories updated successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Organization updated successfully"
-                                        },
-                                        "Organization Categories": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "name_organization_updated"
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Organization Categories not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Organization Categories not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "The given data was invalid."
-                                        },
-                                        "errors": {
-                                            "properties": {
-                                                "name": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "The Organization Categories field is required."
-                                                    }
-                                                }
-                                            },
-                                            "type": "object"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Failed to update Organization Categories"
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Database error"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            },
-            "delete": {
-                "tags": [
-                    "Organization Categories"
-                ],
-                "summary": "Delete a Organization Categories",
-                "description": "Delete a Organization Categories by ID",
-                "operationId": "f365d407ea3098d6b545847b09322b13",
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Organization Categories ID",
-                        "required": true,
-                        "schema": {
-                            "type": "integer"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Organization Categories deleted successfully",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Categories deleted successfully"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Organization Categories not found",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Organization Categories not found"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "400": {
-                        "description": "Category cannot be deleted because it is being used by one or more organizations",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Category cannot be deleted because it is being used by one or more organizations"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server error",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "properties": {
-                                        "message": {
-                                            "type": "string",
-                                            "example": "Failed to delete Categories"
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Database error"
-                                        }
-                                    },
-                                    "type": "object"
-                                }
-                            }
-                        }
-                    }
-                },
-                "security": [
-                    {
-                        "bearerAuth": []
-                    }
-                ]
-            }
-        },
         "/api/downloads": {
             "get": {
                 "tags": [
@@ -2593,11 +2106,27 @@
                 "tags": [
                     "Website Identity"
                 ],
-                "summary": "Retrieve a list of Identity",
+                "summary": "Retrieve website identity data",
                 "operationId": "992e2f7ce09892c31774ba24873759b2",
                 "responses": {
                     "200": {
-                        "description": "Identity retrieved successfully"
+                        "description": "Identity retrieved successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "data": {
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
                     },
                     "401": {
                         "description": "Unauthorized",
@@ -2642,20 +2171,58 @@
                 "tags": [
                     "Website Identity"
                 ],
-                "summary": "Create a new Identity",
-                "description": "Create a new Identity",
+                "summary": "Create or update website identity",
+                "description": "Create or update website identity data including logo and contact information",
                 "operationId": "f8743ca19967f733e3237a5153813bab",
                 "requestBody": {
                     "required": true,
                     "content": {
-                        "application/json": {
+                        "multipart/form-data": {
                             "schema": {
                                 "properties": {
-                                    "key": {
-                                        "type": "string"
+                                    "site_heading": {
+                                        "type": "string",
+                                        "example": "My Website"
                                     },
-                                    "value": {
-                                        "type": "string"
+                                    "site_logo": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "site_favicon": {
+                                        "type": "string",
+                                        "format": "binary"
+                                    },
+                                    "cp_address": {
+                                        "type": "string",
+                                        "example": "123 Main Street"
+                                    },
+                                    "cp_phone": {
+                                        "type": "string",
+                                        "example": "+1234567890"
+                                    },
+                                    "cp_email": {
+                                        "type": "string",
+                                        "example": "contact@example.com"
+                                    },
+                                    "cp_agency": {
+                                        "type": "string",
+                                        "example": "Example Agency"
+                                    },
+                                    "sm_facebook": {
+                                        "type": "string",
+                                        "example": "https://facebook.com/example"
+                                    },
+                                    "sm_instagram": {
+                                        "type": "string",
+                                        "example": "https://instagram.com/example"
+                                    },
+                                    "sm_x": {
+                                        "type": "string",
+                                        "example": "https://x.com/example"
+                                    },
+                                    "sm_youtube": {
+                                        "type": "string",
+                                        "example": "https://youtube.com/example"
                                     }
                                 },
                                 "type": "object"
@@ -2665,7 +2232,7 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Identity created successfully",
+                        "description": "Identity created or updated successfully",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2674,17 +2241,7 @@
                                             "type": "string",
                                             "example": "Identity created successfully"
                                         },
-                                        "Identity": {
-                                            "properties": {
-                                                "key": {
-                                                    "type": "string",
-                                                    "example": "key_value"
-                                                },
-                                                "value": {
-                                                    "type": "string",
-                                                    "example": "value_value"
-                                                }
-                                            },
+                                        "data": {
                                             "type": "object"
                                         }
                                     },
@@ -2694,7 +2251,7 @@
                         }
                     },
                     "401": {
-                        "description": "Unauthorized - Token invalid or missing",
+                        "description": "Unauthorized",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2718,18 +2275,6 @@
                                         "message": {
                                             "type": "string",
                                             "example": "The given data was invalid."
-                                        },
-                                        "errors": {
-                                            "properties": {
-                                                "key": {
-                                                    "type": "array",
-                                                    "items": {
-                                                        "type": "string",
-                                                        "example": "The key field is required."
-                                                    }
-                                                }
-                                            },
-                                            "type": "object"
                                         }
                                     },
                                     "type": "object"
@@ -2745,11 +2290,7 @@
                                     "properties": {
                                         "message": {
                                             "type": "string",
-                                            "example": "Failed to create Identity"
-                                        },
-                                        "error": {
-                                            "type": "string",
-                                            "example": "Database error"
+                                            "example": "Failed to create identity"
                                         }
                                     },
                                     "type": "object"
@@ -3635,8 +3176,14 @@
                                     "position": {
                                         "type": "string"
                                     },
-                                    "category_id": {
+                                    "NIP": {
+                                        "type": "string"
+                                    },
+                                    "field_id": {
                                         "type": "integer"
+                                    },
+                                    "image": {
+                                        "type": "string"
                                     }
                                 },
                                 "type": "object"
@@ -3657,13 +3204,29 @@
                                         },
                                         "organization": {
                                             "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "name_value"
+                                                    "example": "John Doe"
                                                 },
                                                 "position": {
                                                     "type": "string",
-                                                    "example": "position_value"
+                                                    "example": "Kepala Dinas"
+                                                },
+                                                "NIP": {
+                                                    "type": "string",
+                                                    "example": "11111111 123456 1 123"
+                                                },
+                                                "image": {
+                                                    "type": "string",
+                                                    "example": "dummy.jpg"
+                                                },
+                                                "field_id": {
+                                                    "type": "string",
+                                                    "example": "Bagian Sekretariat"
                                                 }
                                             },
                                             "type": "object"
@@ -3783,18 +3346,9 @@
                                             "type": "string",
                                             "example": "Example position"
                                         },
-                                        "category": {
-                                            "properties": {
-                                                "id": {
-                                                    "type": "integer",
-                                                    "example": 1
-                                                },
-                                                "name": {
-                                                    "type": "string",
-                                                    "example": "Example Category"
-                                                }
-                                            },
-                                            "type": "object"
+                                        "NIP": {
+                                            "type": "string",
+                                            "example": "11111111 123456 1 123"
                                         },
                                         "field": {
                                             "properties": {
@@ -3892,8 +3446,8 @@
                                     "position": {
                                         "type": "string"
                                     },
-                                    "category_id": {
-                                        "type": "integer"
+                                    "NIP": {
+                                        "type": "string"
                                     },
                                     "field_id": {
                                         "type": "integer"
@@ -3920,25 +3474,38 @@
                                         },
                                         "organization": {
                                             "properties": {
+                                                "id": {
+                                                    "type": "integer",
+                                                    "example": 1
+                                                },
                                                 "name": {
                                                     "type": "string",
-                                                    "example": "name_updated"
+                                                    "example": "Example Organization"
                                                 },
                                                 "position": {
                                                     "type": "string",
-                                                    "example": "position_updated"
+                                                    "example": "Example position"
                                                 },
-                                                "category_id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                "NIP": {
+                                                    "type": "string",
+                                                    "example": "11111111 123456 1 123"
                                                 },
-                                                "field_id": {
-                                                    "type": "integer",
-                                                    "example": 1
+                                                "field": {
+                                                    "properties": {
+                                                        "id": {
+                                                            "type": "integer",
+                                                            "example": 1
+                                                        },
+                                                        "name": {
+                                                            "type": "string",
+                                                            "example": "Example Field"
+                                                        }
+                                                    },
+                                                    "type": "object"
                                                 },
                                                 "image": {
                                                     "type": "string",
-                                                    "example": "image_updated"
+                                                    "example": "Example Image"
                                                 }
                                             },
                                             "type": "object"
@@ -4119,27 +3686,6 @@
                     "image": {
                         "type": "string",
                         "example": "http://example.com/image.jpg"
-                    }
-                },
-                "type": "object"
-            },
-            "category": {
-                "properties": {
-                    "id": {
-                        "type": "integer",
-                        "example": 1
-                    },
-                    "name": {
-                        "type": "string",
-                        "example": "Kepala Dinas"
-                    },
-                    "created_at": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "updated_at": {
-                        "type": "string",
-                        "format": "date-time"
                     }
                 },
                 "type": "object"
@@ -4328,9 +3874,9 @@
                         "type": "string",
                         "example": "Kepala Dinas"
                     },
-                    "cateogry_id": {
+                    "NIP": {
                         "type": "string",
-                        "example": "Kepala Dinas"
+                        "example": "11111111 123456 1 123"
                     },
                     "created_at": {
                         "type": "string",
@@ -4343,6 +3889,10 @@
                     "image": {
                         "type": "string",
                         "example": "dummy.jpg"
+                    },
+                    "field_id": {
+                        "type": "string",
+                        "example": "Bagian Sekretariat"
                     }
                 },
                 "type": "object"
@@ -4369,10 +3919,6 @@
         {
             "name": "Banner",
             "description": "Banner"
-        },
-        {
-            "name": "Organization Categories",
-            "description": "Organization Categories"
         },
         {
             "name": "Download",

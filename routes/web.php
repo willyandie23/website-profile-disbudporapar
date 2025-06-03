@@ -6,19 +6,25 @@ use App\Http\Controllers\API\NewsController;
 use App\Http\Controllers\API\FieldController;
 use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\GaleryController;
-use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DownloadController;
 use App\Http\Controllers\API\IdentityController;
 use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Frontend\DownloadController as FrontendDownloadController;
+use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
 
 Route::get('/', [MainController::class, 'index']);
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
+
+
+Route::get('/berita', [FrontendNewsController::class, 'index'])->name('berita.index');
+Route::get('/unduhan', [FrontendDownloadController::class, 'index'])->name('unduhan.index');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

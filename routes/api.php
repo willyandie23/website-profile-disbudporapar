@@ -11,6 +11,7 @@ use App\Http\Controllers\API\DownloadController;
 use App\Http\Controllers\API\FieldController;
 use App\Http\Controllers\API\IdentityController;
 use App\Http\Controllers\API\OrganizationController;
+use App\Http\Controllers\Frontend\DownloadController as FrontendDownloadController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -24,6 +25,8 @@ Route::get('/banner', [BannerController::class, 'index']);
 Route::get('/galery', [GaleryController::class, 'index']);
 Route::get('/news', [NewsController::class, 'index']);
 Route::get('/downloads', [DownloadController::class, 'index']);
+Route::post('/downloads/{id}/increment', [FrontendDownloadController::class, 'incrementDownload']);
+Route::post('/downloads/{id}/download', [DownloadController::class, 'download']);
 Route::get('/identities', [IdentityController::class, 'index']);
 Route::get('/fields', [FieldController::class, 'index']);
 
@@ -52,7 +55,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/downloads/{id}', [DownloadController::class, 'show']);
     Route::put('/downloads/{id}', [DownloadController::class, 'update']);
     Route::delete('/downloads/{id}', [DownloadController::class, 'destroy']);
-    Route::post('/downloads/{id}/download', [DownloadController::class, 'download']);
 
     Route::post('/identities', [IdentityController::class, 'store']);
     Route::get('/identities/{id}', [IdentityController::class, 'show']);
