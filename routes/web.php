@@ -17,8 +17,9 @@ use App\Http\Controllers\Frontend\FieldController as FrontendFieldController;
 use App\Http\Controllers\Frontend\GaleryController as FrontendGaleryController;
 use App\Http\Controllers\Frontend\GreetingController;
 use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
+use App\Http\Controllers\Frontend\OrganizationController as FrontendOrganizationController;
 
-Route::get('/', [MainController::class, 'index']);
+Route::get('/', [MainController::class, 'index'])->name('home.index');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -31,6 +32,7 @@ Route::get('/unduhan', [FrontendDownloadController::class, 'index'])->name('undu
 Route::get('/galeri', [FrontendGaleryController::class, 'index'])->name('galeri.index');
 Route::get('/bidang/{bidang}', [FrontendFieldController::class, 'show'])->name('bidang.show');
 Route::get('/sambutan', [GreetingController::class, 'index'])->name('sambutan.index');
+Route::get('/organisasi', [FrontendOrganizationController::class, 'index'])->name('organisasi.index');
 
 
 Route::middleware('auth')->group(function () {

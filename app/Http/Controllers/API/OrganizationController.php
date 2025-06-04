@@ -424,13 +424,13 @@ class OrganizationController extends Controller
     {
         $organizations = Organization::all();
         $fields = Field::all();
-        return view('backend.organizational-structure.organizations.create', compact('organizations', 'categories', 'fields'));
+        return view('backend.organizational-structure.organizations.create', compact('organizations', 'fields'));
     }
     
     public function edit($id)
     {
         $organizations = Organization::findOrFail($id);
         $fields = Field::all();
-        return view('backend.organizational-structure.organizations.edit', compact('organizations', 'categories', 'fields'));
+        return view('backend.organizational-structure.organizations.edit', compact('organizations', 'fields'));
     }
 }

@@ -1,6 +1,6 @@
 <!-- Navbar & Hero Start -->
 <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 {{ Route::currentRouteName() !== 'home' ? 'opaque' : '' }}">
-    <a href="" class="navbar-brand p-0">
+    <a href="{{ route('home.index') }}" class="navbar-brand p-0">
         <img src="" id="site_logo" height="150px" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
@@ -8,12 +8,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
         <div class="navbar-nav ms-auto py-0">
-            <a href="/" class="nav-item nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Home</a>
+            <a href="{{ route('home.index') }}" class="nav-item nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}">Home</a>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
                 <div class="dropdown-menu m-0">
                     <a href="{{ route('sambutan.index') }}" class="dropdown-item">Sambutan Kepala</a>
-                    <a href="" class="dropdown-item">Struktur Organisasi</a>
+                    <a href="{{ route('organisasi.index') }}" class="dropdown-item">Struktur Organisasi</a>
                 </div>
             </div>
             <div class="nav-item dropdown">

@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Bidang | DISBUDPORAPAR')
+@section('title', 'Sambutan Kepala | DISBUDPORAPAR')
 
 @push('css')
     <style>
@@ -111,7 +111,7 @@
                                     <div class="bg-light rounded-bottom text-center py-4">
                                         <div class="m-1">
                                             <h6 class="mb-3"><strong>{{ $organization->name }}</strong></h6>
-                                            <p class="mb-0">NIP: {{ $organization->NIP }}</p>
+                                            <p class="mb-0">NIP. {{ $organization->NIP }}</p>
                                         </div>
                                     </div>
                                 </div>
