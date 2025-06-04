@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\DownloadController as FrontendDownloadController;
+use App\Http\Controllers\Frontend\FieldController as FrontendFieldController;
 use App\Http\Controllers\Frontend\GaleryController as FrontendGaleryController;
 use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
 
@@ -27,6 +28,7 @@ Route::get('/berita', [FrontendNewsController::class, 'index'])->name('berita.in
 Route::get('/berita/{berita}', [FrontendNewsController::class, 'show'])->name('berita.show');
 Route::get('/unduhan', [FrontendDownloadController::class, 'index'])->name('unduhan.index');
 Route::get('/galeri', [FrontendGaleryController::class, 'index'])->name('galeri.index');
+Route::get('/bidang/{bidang}', [FrontendFieldController::class, 'show'])->name('bidang.show');
 
 
 Route::middleware('auth')->group(function () {

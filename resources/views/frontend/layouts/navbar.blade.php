@@ -12,15 +12,14 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
                 <div class="dropdown-menu m-0">
-                    <a href="feature.html" class="dropdown-item">Sambutan</a>
-                    <a href="product.html" class="dropdown-item">Struktur Organisasi</a>
+                    <a href="" class="dropdown-item">Bidang 1</a>
+                    <a href="" class="dropdown-item">Bidang 2</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Bidang</a>
-                <div class="dropdown-menu m-0">
-                    <a href="feature.html" class="dropdown-item">Bidang 1</a>
-                    <a href="product.html" class="dropdown-item">Bidang 2</a>
+                <div class="dropdown-menu m-0" id="fieldsDropdownMenu">
+                    <!-- Bidang akan dimuat di sini secara dinamis -->
                 </div>
             </div>
             <a href="{{ route('berita.index') }}" class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.news.index' ? 'active' : '' }}">Berita</a>
@@ -31,3 +30,41 @@
     </div>
 </nav>
 <!-- Navbar & Hero End -->
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            // Mengambil data bidang dari API dan menampilkannya di dropdown
+            $.ajax({
+                url: '/api/fields',
+                type: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const fields = response.data;
+                        let dropdownHtml = '';
+                        
+                        // Mengisi dropdown dengan nama bidang
+                        fields.forEach(field => {
+                            if (field.name !== 'Kepala Dinas') {  // Mengecek nama bidang
+                                dropdownHtml += `
+                                    <a href="/bidang/${field.id}" class="dropdown-item">
+                                        ${field.name}
+                                    </a>
+                                `;
+                            }
+                        });
+
+                        // Menambahkan list ke dropdown menu
+                        $('#fieldsDropdownMenu').html(dropdownHtml);
+                    } else {
+                        console.log('Gagal memuat bidang');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching fields:', xhr.responseText);
+                    Swal.fire('Error!', 'Gagal memuat data bidang.', 'error');
+                }
+            });
+        });
+    </script>
+@endpush

@@ -491,20 +491,6 @@
                         <div class="team-inner rounded">
                             <div class="team-img">
                                 <img src="{{ asset('frontend/image/team-1.jpg') }}" class="img-fluid rounded-top w-100" alt="Image">
-                                <div class="team-share">
-                                    <a class="btn btn-secondary btn-md-square rounded-pill text-white mx-1"
-                                        href=""><i class="fas fa-share-alt"></i></a>
-                                </div>
-                                <div class="team-icon rounded-pill py-2 px-2">
-                                    <a class="btn btn-secondary btn-sm-square rounded-pill mx-1" href=""><i
-                                            class="fab fa-facebook-f"></i></a>
-                                    <a class="btn btn-secondary btn-sm-square rounded-pill me-1" href=""><i
-                                            class="fab fa-twitter"></i></a>
-                                    <a class="btn btn-secondary btn-sm-square rounded-pill me-1" href=""><i
-                                            class="fab fa-linkedin-in"></i></a>
-                                    <a class="btn btn-secondary btn-sm-square rounded-pill me-1" href=""><i
-                                            class="fab fa-instagram"></i></a>
-                                </div>
                             </div>
                             <div class="bg-light rounded-bottom text-center py-4">
                                 <h4 class="mb-3">Hard Branots</h4>

@@ -423,7 +423,6 @@ class OrganizationController extends Controller
     public function create()
     {
         $organizations = Organization::all();
-        $categories = Category::all();
         $fields = Field::all();
         return view('backend.organizational-structure.organizations.create', compact('organizations', 'categories', 'fields'));
     }
@@ -431,7 +430,6 @@ class OrganizationController extends Controller
     public function edit($id)
     {
         $organizations = Organization::findOrFail($id);
-        $categories = Category::all();
         $fields = Field::all();
         return view('backend.organizational-structure.organizations.edit', compact('organizations', 'categories', 'fields'));
     }
