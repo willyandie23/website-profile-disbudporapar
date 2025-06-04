@@ -15,6 +15,7 @@ use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\DownloadController as FrontendDownloadController;
 use App\Http\Controllers\Frontend\FieldController as FrontendFieldController;
 use App\Http\Controllers\Frontend\GaleryController as FrontendGaleryController;
+use App\Http\Controllers\Frontend\GreetingController;
 use App\Http\Controllers\Frontend\NewsController as FrontendNewsController;
 
 Route::get('/', [MainController::class, 'index']);
@@ -29,6 +30,7 @@ Route::get('/berita/{berita}', [FrontendNewsController::class, 'show'])->name('b
 Route::get('/unduhan', [FrontendDownloadController::class, 'index'])->name('unduhan.index');
 Route::get('/galeri', [FrontendGaleryController::class, 'index'])->name('galeri.index');
 Route::get('/bidang/{bidang}', [FrontendFieldController::class, 'show'])->name('bidang.show');
+Route::get('/sambutan', [GreetingController::class, 'index'])->name('sambutan.index');
 
 
 Route::middleware('auth')->group(function () {

@@ -12,8 +12,8 @@
             <div class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Profil</a>
                 <div class="dropdown-menu m-0">
-                    <a href="" class="dropdown-item">Bidang 1</a>
-                    <a href="" class="dropdown-item">Bidang 2</a>
+                    <a href="{{ route('sambutan.index') }}" class="dropdown-item">Sambutan Kepala</a>
+                    <a href="" class="dropdown-item">Struktur Organisasi</a>
                 </div>
             </div>
             <div class="nav-item dropdown">
