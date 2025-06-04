@@ -16,6 +16,7 @@
             padding-top: 90px;
             padding-left: 150px;
             padding-right: 150px;
+            user-select: none;
         }
 
         h2 {

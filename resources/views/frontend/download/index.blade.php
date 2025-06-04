@@ -9,23 +9,19 @@
             color: var(--bs-dark);
         }
 
+        /* Styling for the gallery container */
         .main-content {
-            position: static;
-            color: var(--bs-dark);
             padding-top: 90px;
+            color: var(--bs-dark);
         }
 
-        h2 {
-            padding-top: 15px;
-            font-size: 28px;
-            font-weight: bold;
-        }
-
+        /* Responsif untuk tabel */
         .table-container {
             padding-left: 150px;
             padding-right: 150px;
         }
 
+        /* Table styling */
         .table {
             margin-top: 20px;
             width: 100%;
@@ -62,18 +58,43 @@
             font-size: 14px;
         }
 
-        /* Mengubah warna tombol download */
-        .btn-info {
-            background-color: #4caf50;  /* Warna hijau terang untuk tombol */
-            border-color: #4caf50;
-            transition: background-color 0.3s ease;
-            color: white; /* Warna teks putih */
-            font-size: medium;
+        /* Fitur responsif untuk DataTables */
+        @media (max-width: 768px) {
+            .table-container {
+                padding-top: 0px;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+
+            .table th, .table td {
+                padding: 8px 10px;
+            }
+
+            .table {
+                font-size: 14px;
+            }
+
+            /* Tombol download di mobile */
+            .btn-info {
+                font-size: 14px; 
+                padding: 8px 12px;
+            }
         }
 
-        .btn-info:hover {
-            background-color: #45a049;  /* Warna tombol saat hover */
-            border-color: #45a049;
+        @media (max-width: 992px) and (min-width: 769px) {
+            .table-container {
+                padding-top: 0px;
+                padding-left: 30px;
+                padding-right: 30px;
+            }
+
+            .table {
+                font-size: 15px; /* Adjust font size for tablets */
+            }
+
+            .btn-info {
+                font-size: 15px; /* Adjust font size for tablet */
+            }
         }
 
         @media (min-width: 992px) {
@@ -159,6 +180,7 @@
                         }
                     }
                 ],
+                responsive: true,
                 drawCallback: function() {
                     $('.download-btn').on('click', function() {
                         const fileId = $(this).data('id');

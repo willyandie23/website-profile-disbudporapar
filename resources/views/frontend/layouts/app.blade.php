@@ -28,8 +28,11 @@
         <!-- Customized Bootstrap Stylesheet -->
         <link href="{{ asset('frontend/css/bootstrap.min.css') }}" rel="stylesheet">
 
-        {{-- data Table --}}
-        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.8/css/dataTables.bootstrap5.min.css">
+        <!-- DataTables CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/2.3.1/css/dataTables.bootstrap5.min.css">
+        <!-- DataTables Responsive CSS -->
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/3.0.4/css/responsive.bootstrap5.min.css">
+
         @stack('css')
 
         <!-- Template Stylesheet -->
@@ -85,10 +88,19 @@
 
         
     <!-- JavaScript Libraries -->
+    <!-- jQuery -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.min.js"></script>
-    <script src="https://cdn.datatables.net/2.0.8/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- DataTables JS -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.1/js/dataTables.min.js"></script>
+
+    <!-- DataTables Bootstrap5 Integration -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/2.3.1/js/dataTables.bootstrap5.min.js"></script>
+
+    <!-- DataTables Responsive -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/3.0.4/js/responsive.bootstrap5.min.js"></script>
+
     <script src="{{ asset('frontend/js/wow/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/js/easing/easing.min.js') }}"></script>
     <script src="{{ asset('frontend/js/waypoints/waypoints.min.js') }}"></script>

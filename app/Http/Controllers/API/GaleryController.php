@@ -53,7 +53,7 @@ class GaleryController extends Controller
     public function index()
     {
         try {
-            $gallerys = Galery::orderBy('id', 'asc')->get();
+            $gallerys = Galery::orderBy('id', 'desc')->get();
 
             return ApiResponseClass::success(
                 $gallerys,
