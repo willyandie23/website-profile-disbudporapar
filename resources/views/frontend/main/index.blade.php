@@ -12,6 +12,25 @@
             height: 100%;
         }
 
+        .section-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            width: 50%;
+            height: 3px;
+            background-color: #007bff;
+            bottom: 0;
+            left: 0;
+        }
+
         .team .container-fluid .row {
             display: flex;
             justify-content: center;
@@ -41,8 +60,8 @@
                 @foreach($banners as $key => $banner)
                     <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                         <img src="{{ $banner->image }}" class="img-fluid w-100" alt="{{ $banner->title }}">
-                        <div class="carousel-caption-{{ $key + 1 }}">
-                            <div class="carousel-caption-{{ $key + 1 }}-content" style="max-width: 1000px;">
+                        <div class="carousel-caption">
+                            <div class="carousel-caption-content" style="max-width: 1000px;">
                                 <h1 class="display-2 text-capitalize text-white mb-4 fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.3s" style="animation-delay: 1.3s;">{{ $banner->title }}</h1>
                                 <p class="mb-5 fs-5 text-white fadeInLeft animated" data-animation="fadeInLeft" data-delay="1.5s" style="animation-delay: 1.5s;">{{ $banner->description }}</p>
                             </div>
@@ -72,9 +91,8 @@
             <div class="row">
                 <!-- Blog Section (Left Column) -->
                 <div class="col-md-12 col-lg-6"> <!-- Mengurangi ukuran kolom berita -->
-                    <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                        <h4 class="text-uppercase text-primary mt-5">Berita Disbudporapar</h4>
-                        <hr>
+                    <div class="text-left mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                        <h2 class="section-title text-uppercase text-black mt-5">Berita Disbudporapar</h2>
                     </div>
                     <div class="row g-4 justify-content-center">
                         @foreach($latestNews as $news)
@@ -97,9 +115,8 @@
 
                 <!-- Downloads Section (Right Column) -->
                 <div class="col-md-12 col-lg-6">
-                    <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                        <h4 class="text-uppercase text-primary mt-5">Unduh</h4>
-                        <hr>
+                    <div class="text-left mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                        <h2 class="section-title text-uppercase text-black mt-5">Unduh</h2>
                     </div>
                     <ul class="list-group wow fadeInUp" data-wow-delay="0.2s"">
                         @foreach($latestDownloads as $download)
@@ -113,8 +130,9 @@
 
                     <!-- Video Section -->
                     <div class="pt-5">
-                        <h4 class="text-uppercase text-primary">Video</h4>
-                        <hr>
+                        <div class="text-left mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                            <h2 class="section-title text-uppercase text-black mt-5">Video</h2>
+                        </div>
                         <!-- Embed YouTube Video -->
                         <div class="video-container">
                             <iframe src="https://www.youtube.com/embed/iQ7Vwwe_kDY" allowfullscreen></iframe>
@@ -130,8 +148,7 @@
     <div class="container-fluid feature bg-light py-5">
         <div class="container py-5">
             <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                <h3 class="display-6 text-capitalize mb-3">Galeri</h3>
-                <hr>
+                <h2 class="section-title text-uppercase text-black">Galeri Disbudporapar</h2>
             </div>
             <div class="row">
                 <!-- Galery Section -->
@@ -159,7 +176,7 @@
 
     <!-- Couter Data Section Start -->
     <div class="container-fluid counter py-5">
-        <div class="container py-5 d-flex justify-content-center">
+        <div class="container py-5">
             <div class="row g-5">
                 <!-- Employee Count Section -->
                 <div class="col-md-6 col-lg-6 col-xl-4 wow fadeInUp" data-wow-delay="0.2s">
@@ -211,8 +228,7 @@
     <div class="container-fluid team pb-5">
         <div class="container pb-5">
             <div class="text-center mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
-                <h4 class="text-uppercase text-primary mt-5">Struktur Organisasi</h4>
-                <hr>
+                <h2 class="section-title text-uppercase text-black mt-5">Struktur Organisasi</h2>
             </div>
             <div class="row g-4">
                 <div class="row g-4 d-flex justify-content-center">

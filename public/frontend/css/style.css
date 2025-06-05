@@ -298,7 +298,55 @@
     position: relative;
 }
 
-.carousel .carousel-inner .carousel-item .carousel-caption-1  {
+.carousel .carousel-inner .carousel-item .carousel-caption {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+}
+
+.carousel-caption .carousel-caption-content {
+    text-align: end;
+    padding-right: 100px;
+}
+
+.carousel-caption .carousel-caption-btn {
+    display: flex;
+    justify-content: end;
+}
+
+.carousel .carousel-inner .carousel-item .carousel-caption-2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    background: linear-gradient(rgba(0, 0, 0, .5), rgba(0, 0, 0, 0.5));
+    background-size: cover;
+}
+
+.carousel-caption-2-content {
+    text-align: start;
+    padding-left: 100px;
+}
+
+.carousel-caption-2-content .carousel-caption-2-content-btn {
+    display: flex;
+    justify-content: start;
+}
+
+/* .carousel .carousel-inner .carousel-item .carousel-caption-1  {
     position: absolute;
     width: 100%;
     height: 100%;
@@ -344,7 +392,7 @@
 .carousel-caption-2-content .carousel-caption-2-content-btn {
     display: flex;
     justify-content: start;
-}
+} */
 
 
 @media (max-width: 992px) {
