@@ -12,6 +12,7 @@ use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Backend\DashboardController;
+use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\DownloadController as FrontendDownloadController;
 use App\Http\Controllers\Frontend\FieldController as FrontendFieldController;
 use App\Http\Controllers\Frontend\GaleryController as FrontendGaleryController;
@@ -25,7 +26,6 @@ Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 
-
 Route::get('/berita', [FrontendNewsController::class, 'index'])->name('berita.index');
 Route::get('/berita/{berita}', [FrontendNewsController::class, 'show'])->name('berita.show');
 Route::get('/unduhan', [FrontendDownloadController::class, 'index'])->name('unduhan.index');
@@ -33,7 +33,8 @@ Route::get('/galeri', [FrontendGaleryController::class, 'index'])->name('galeri.
 Route::get('/bidang/{bidang}', [FrontendFieldController::class, 'show'])->name('bidang.show');
 Route::get('/sambutan', [GreetingController::class, 'index'])->name('sambutan.index');
 Route::get('/organisasi', [FrontendOrganizationController::class, 'index'])->name('organisasi.index');
-
+Route::get('/hubungi-kami', [ContactController::class, 'index'])->name('hubungi.index');
+Route::post('/hubungi-kami', [ContactController::class, 'store'])->name('hubungi.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

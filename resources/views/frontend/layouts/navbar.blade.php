@@ -25,7 +25,7 @@
             <a href="{{ route('berita.index') }}" class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.news.index' ? 'active' : '' }}">Berita</a>
             <a href="{{ route('unduhan.index') }}" class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.download.index' ? 'active' : '' }}">Unduhan</a>
             <a href="{{ route('galeri.index') }}" class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.galery.index' ? 'active' : '' }}">Galeri</a>
-            <a href="" class="nav-item nav-link">Hubungi Kami</a>
+            <a href="{{ route('hubungi.index') }}" class="nav-item nav-link {{ Route::currentRouteName() == 'frontend.contact.index' ? 'active' : '' }}">Hubungi Kami</a>
         </div>
     </div>
 </nav>

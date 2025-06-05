@@ -98,6 +98,13 @@
 
 @push('scripts')
     <script>
-        
+        if (session('success'))
+            Swal.fire({
+                icon: 'success',
+                title: 'Pesan Berhasil Dikirim!',
+                text: "{{ session('success') }}",
+                showConfirmButton: false,
+                timer: 3000
+            });
     </script>
 @endpush

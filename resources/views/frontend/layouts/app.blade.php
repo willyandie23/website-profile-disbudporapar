@@ -100,13 +100,14 @@
     <!-- DataTables Responsive -->
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/3.0.4/js/dataTables.responsive.min.js"></script>
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/responsive/3.0.4/js/responsive.bootstrap5.min.js"></script>
-
+    
     <script src="{{ asset('frontend/js/wow/wow.min.js') }}"></script>
     <script src="{{ asset('frontend/js/easing/easing.min.js') }}"></script>
     <script src="{{ asset('frontend/js/waypoints/waypoints.min.js') }}"></script>
     <script src="{{ asset('frontend/js/counterup/counterup.min.js') }}"></script>
     <script src="{{ asset('frontend/js/owlcarousel/owl.carousel.min.js') }}"></script>
     
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- Template Javascript -->
     <script src="{{ asset('frontend/js/main.js') }}"></script>
     <script>

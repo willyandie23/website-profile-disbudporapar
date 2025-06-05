@@ -92,7 +92,9 @@
                 dengan ini kami menyampaikan ucapan terima kasih dan penghargaan yang sebesar-besarnya.
             </p>
             <br>
-            <p>Kasongan, Juni 2025</p>
+            <p>
+                Kasongan, Juni 2025
+            </p>
             <p>
                 Kepala Disbudporapar Kabupaten Katingan,
             </p>
