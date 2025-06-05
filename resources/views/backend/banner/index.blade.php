@@ -16,8 +16,8 @@
                             <tr>
                                 <th>No</th>
                                 <th>Judul</th>
-                                <th>Gambar</th>
                                 <th>Deskripsi</th>
+                                <th>Gambar</th>
                                 <th>Aksi</th>
                             </tr>
                         </thead>

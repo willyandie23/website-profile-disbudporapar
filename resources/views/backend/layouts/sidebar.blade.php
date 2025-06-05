@@ -32,7 +32,7 @@
                         </li>
                         <li class="pc-item">
                             <a class="pc-link" href="{{ route('banner.index') }} ">
-                                Slider/Banner
+                                Banner
                             </a>
                         </li>
                     </ul>
