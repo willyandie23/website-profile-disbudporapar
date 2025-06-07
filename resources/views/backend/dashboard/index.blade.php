@@ -3,13 +3,12 @@
 @section('title', 'Beranda')
 
 @section('content')
-    <div>
-        Dashboard
-        @hasrole('admin')
-            <p>Ini adalah Admin</p>
-        @endhasrole
-        @hasrole('superadmin')
-            <p>Ini adalah superadminn</p>
-        @endhasrole
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                </div>
+            </div>
+        </div>
     </div>
 @endsection

@@ -103,3 +103,13 @@ Breadcrumbs::for('logs.show', function (BreadcrumbTrail $trail, $logsId) {
     $trail->parent('logs.index');
     $trail->push('Log Detail', route('logs.show', $logsId));
 });
+
+// Contact breadcrumbs
+Breadcrumbs::for('contact.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Daftar Kontak Pesan', route('contact.index'));
+});
+Breadcrumbs::for('contact.show', function (BreadcrumbTrail $trail, $contactId) {
+    $trail->parent('contact.index');
+    $trail->push('Kontak Pesan Detail', route('contact.show', $contactId));
+});

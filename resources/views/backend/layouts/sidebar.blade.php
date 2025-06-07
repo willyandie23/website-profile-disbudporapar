@@ -79,6 +79,12 @@
                             </a>
                         </li>
                     </ul>
+                    <li class="pc-item">
+                        <a href="{{ route('contact.index') }}" class="pc-link">
+                            <span class="pc-micon"><i class="ti ti-mailbox"></i></span>
+                            <span class="pc-mtext">Kotak Saran</span>
+                        </a>
+                    </li
                 </li>
                 @hasrole('superadmin')
                     <li class="pc-item pc-caption">

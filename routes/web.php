@@ -11,6 +11,7 @@ use App\Http\Controllers\API\IdentityController;
 use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
+use App\Http\Controllers\Backend\ContactController as BackendContactController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Frontend\ContactController;
 use App\Http\Controllers\Frontend\DownloadController as FrontendDownloadController;
@@ -79,6 +80,9 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
 
     Route::get('/identity', [IdentityController::class, 'identityShow'])->name('identity.index');
     Route::post('/identity', [IdentityController::class, 'store'])->name('identity.store');
+
+    Route::get('/contact', [BackendContactController::class, 'index'])->name('contact.index');
+    Route::get('/contact/{contact}', [BackendContactController::class, 'show'])->name('contact.show');
 });
 
 require __DIR__.'/auth.php';
