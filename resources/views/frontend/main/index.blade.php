@@ -89,7 +89,7 @@
     <div class="container-fluid blog pb-5">
         <div class="container pb-5">
             <div class="row">
-                <!-- Blog Section (Left Column) -->
+                <!-- News Section (Left Column) -->
                 <div class="col-md-12 col-lg-6"> <!-- Mengurangi ukuran kolom berita -->
                     <div class="text-left mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
                         <h2 class="section-title text-uppercase text-black mt-5">Berita Disbudporapar</h2>

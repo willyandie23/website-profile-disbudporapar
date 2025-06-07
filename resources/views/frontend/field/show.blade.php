@@ -33,7 +33,52 @@
             text-align: justify;
         }
 
-        /* Responsivitas untuk layar lebih kecil (Mobile View) */
+        .team-item {
+            margin-bottom: 20px;
+            background-color: #f8f9fa;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            min-height: 350px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .bg-light {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto;
+        }
+
+        h6 {
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        p {
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .team-item:hover h6, .team-item:hover p {
+            white-space: normal;
+            overflow: visible;
+            text-overflow: unset;
+        }
+
         @media (max-width: 768px) {
             .main-content {
                 padding-top: 0px;
@@ -42,7 +87,6 @@
             }
         }
 
-        /* Untuk tablet view dan lebih besar */
         @media (max-width: 992px) and (min-width: 769px) {
             .main-content {
                 padding-top: 0px;

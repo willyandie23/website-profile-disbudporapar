@@ -1,6 +1,6 @@
 @extends('frontend.layouts.app')
 
-@section('title', 'Hubungi Kami | DISBUDPORAPAR')
+@section('title', 'Hubungi Kami | DISBUDPORAP')
 
 @push('css')
     <style>
@@ -65,34 +65,79 @@
                 border: none;
             }
         }
+
+        /* Grid layout for form and map */
+        .contact-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 30px;
+        }
+
+        .contact-form {
+            flex: 1;
+        }
+
+        .map-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        iframe {
+            max-width: 100%;
+            border: 0;
+            height: 450px;
+        }
+
+        /* Responsiveness for mobile */
+        @media (max-width: 768px) {
+            .contact-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .contact-form {
+                margin-bottom: 30px;
+            }
+        }
     </style>
 @endpush
 
 @section('content')
-    <div class="container main-content">
+    <div class="container main-content mb-3">
         <h2>Hubungi Kami</h2>
         <hr>
 
-        <form action="{{ route('hubungi.store') }}" method="POST">
-            @csrf
-            <div class="mb-3">
-                <label for="name" class="form-label">Nama</label>
-                <input type="text" class="form-control" id="name" name="name" required>
+        <div class="contact-container">
+            <!-- Left side: Contact Form -->
+            <div class="contact-form">
+                <form action="{{ route('hubungi.store') }}" method="POST">
+                    @csrf
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Nama</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="subject" class="form-label">Subjek</label>
+                        <input type="text" class="form-control" id="subject" name="subject" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message" class="form-label">Pesan</label>
+                        <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Kirim</button>
+                </form>
             </div>
-            <div class="mb-3">
-                <label for="email" class="form-label">Email</label>
-                <input type="string" class="form-control" id="email" name="email" required>
+
+            <!-- Right side: Google Map -->
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3987.678608041673!2d113.40991227480464!3d-1.8765414981063357!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dfce2472bffbb63%3A0x7563f11666b3de5!2sDinas%20Pemuda%20Olahraga%20Kebudayaan%20Dan%20Pariwisata!5e0!3m2!1sid!2sid!4v1749299898389!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div class="mb-3">
-                <label for="subject" class="form-label">Subjek</label>
-                <input type="text" class="form-control" id="subject" name="subject" required>
-            </div>
-            <div class="mb-3">
-                <label for="message" class="form-label">Pesan</label>
-                <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
-            </div>
-            <button type="submit" class="btn btn-primary">Kirim</button>
-        </form>
+        </div>
     </div>
 @endsection
 

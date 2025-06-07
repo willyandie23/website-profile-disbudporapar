@@ -1,7 +1,7 @@
 <!-- Navbar & Hero Start -->
 <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0 {{ Route::currentRouteName() !== 'home' ? 'opaque' : '' }}">
     <a href="{{ route('home.index') }}" class="navbar-brand p-0">
-        <img src="" id="site_logo" height="150px" alt="Logo">
+        <img src="" class="site_logo" height="150px" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
         <span class="fa fa-bars"></span>

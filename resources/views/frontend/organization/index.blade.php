@@ -34,6 +34,45 @@
             background-color: #f8f9fa;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            min-height: 350px; /* Setel tinggi minimal card */
+            overflow: hidden; /* Menghindari elemen keluar dari card */
+            transition: all 0.3s ease; /* Menambahkan transisi untuk efek hover */
+        }
+
+        .bg-light {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-grow: 1;
+            padding: 15px;
+            overflow-y: auto; /* Menambahkan scrollbar jika konten panjang */
+        }
+
+        h6 {
+            font-size: 16px;
+            font-weight: bold;
+            white-space: nowrap; /* Menjaga teks tetap dalam satu baris */
+            overflow: hidden; /* Memastikan teks yang panjang tidak keluar */
+            text-overflow: ellipsis; /* Menambahkan elipsis jika teks panjang */
+            max-width: 100%; /* Menjamin lebar maksimal untuk nama */
+            transition: all 0.3s ease; /* Menambahkan transisi untuk efek hover */
+        }
+
+        p {
+            font-size: 14px;
+            white-space: nowrap; /* Menjaga posisi teks tetap dalam satu baris */
+            overflow: hidden; /* Memastikan teks yang panjang tidak keluar */
+            text-overflow: ellipsis; /* Menambahkan elipsis pada teks yang panjang */
+            max-width: 100%; /* Menjamin lebar maksimal untuk posisi jabatan */
+            transition: all 0.3s ease; /* Menambahkan transisi untuk efek hover */
+        }
+
+        .team-item:hover h6, .team-item:hover p {
+            white-space: normal; /* Membiarkan teks untuk berpindah baris */
+            overflow: visible; /* Menghilangkan batas overflow */
+            text-overflow: unset; /* Menghilangkan elipsis pada hover */
         }
 
         /* Responsivitas untuk layar lebih kecil (Mobile View) */

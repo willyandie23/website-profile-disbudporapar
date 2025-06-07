@@ -69,13 +69,13 @@
             <div class="container">
                 <div class="row g-4 align-items-center">
                     <div class="col-md-6 text-center text-md-start mb-md-0">
-                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>Your Site Name</a>, All right reserved.</span>
+                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>2025</a>, Disbudporapar Kab. Katingan.</span>
                     </div>
                     <div class="col-md-6 text-center text-md-end text-body">
                         <!--/*** This template is free as long as you keep the below author’s credit link/attribution link/backlink. ***/-->
                         <!--/*** If you'd like to use the template without the below author’s credit link/attribution link/backlink, ***/-->
                         <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
-                        Designed By WS  Distributed By <a class="border-bottom text-white" href="https://themewagon.com">ThemeWagon</a>
+                        Dibuat dengan ♥ oleh <a class="border-bottom text-white" href="https://diskominfopersantik.katingankab.go.id/">Diskominfostandi Kab. Katingan</a>
                     </div>
                 </div>
             </div>
@@ -126,10 +126,42 @@
                             console.log('No favicon in response');
                         }
                         if (response.data.site_logo) {
-                            $('#site_logo').attr('src', response.data.site_logo).show();
+                            $('.site_logo').attr('src', response.data.site_logo).show();
                             console.log('Logo set to:', response.data.site_logo);
                         } else {
                             console.log('No logo in response');
+                        }
+                        
+                        // Set social media links
+                        if (response.data.sm_facebook) {
+                            $('#sm_fb').attr('href', response.data.sm_facebook);
+                            console.log('Facebook link set to:', response.data.sm_facebook);
+                        }
+                        if (response.data.sm_instagram) {
+                            $('#sm_ig').attr('href', response.data.sm_instagram);
+                            console.log('Instagram link set to:', response.data.sm_instagram);
+                        }
+                        if (response.data.sm_youtube) {
+                            $('#sm_ytb').attr('href', response.data.sm_youtube);
+                            console.log('YouTube link set to:', response.data.sm_youtube);
+                        }
+
+                        // Additional fields like cp_address, cp_phone, etc.
+                        if (response.data.cp_address) {
+                            $('#cp_address').html('<i class="fa fa-map-marker-alt me-2"></i>' + response.data.cp_address);;
+                            console.log('Contact address set to:', response.data.cp_address);
+                        }
+                        if (response.data.cp_phone) {
+                            $('#cp_phone').html('<i class="fas fa-phone me-2"></i>' + response.data.cp_phone);
+                            console.log('Phone number set to:', response.data.cp_phone);
+                        }
+                        if (response.data.cp_email) {
+                            $('#cp_email').html('<i class="fas fa-envelope me-2"></i>' + response.data.cp_email);
+                            console.log('Email address set to:', response.data.cp_email);
+                        }
+                        if (response.data.cp_agency) {
+                            $('#cp_agency').text(response.data.cp_agency);
+                            console.log('Agency name set to:', response.data.cp_agency);
                         }
                     } else {
                         console.log('Invalid response format:', response);
