@@ -144,7 +144,7 @@ class OrganizationController extends Controller
             'position' => 'required|string|max:255',
             'NIP' => 'required|string|max:255',
             'field_id' => 'required|exists:fields,id',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120',
         ]);
 
         try {

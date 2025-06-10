@@ -187,7 +187,7 @@ class GaleryController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // 2MB = 2048KB
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', //
         ]);
 
         try {

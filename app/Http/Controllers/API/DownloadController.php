@@ -101,7 +101,7 @@ class DownloadController extends Controller
     {
         $request->validate([
             'file_name' => 'required|string|max:255',
-            'file' => 'required|mimes:pdf|max:10240',
+            'file' => 'required|mimes:pdf|max:5120', //5MB = 5120KB
         ]);
 
         try {
