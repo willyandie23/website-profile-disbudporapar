@@ -1,4 +1,9 @@
 
+html, body {
+    overflow-x: hidden; /* Menghilangkan scroll horizontal */
+    width: 100%; /* Memastikan lebar halaman tidak melebihi layar */
+}
+
 /*** Spinner Start ***/
 /*** Spinner ***/
 #spinner {

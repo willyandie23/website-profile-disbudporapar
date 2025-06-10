@@ -31,6 +31,8 @@
 
         .description {
             text-align: justify;
+            overflow: visible;
+            white-space: normal;
         }
 
         .team-item {

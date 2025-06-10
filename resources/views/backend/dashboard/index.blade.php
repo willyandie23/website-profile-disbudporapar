@@ -86,12 +86,12 @@
         </div>
     </div>
 
-    <!-- Dua pesan terbaru -->
+    <!-- Pesan terbaru -->
     <div class="row">
         <div class="col-md-12">
             <div class="card shadow-sm">
                 <div class="card-header">
-                    <h4>Dua Pesan Terbaru</h4>
+                    <h4>Pesan Terbaru</h4>
                 </div>
                 <div class="card-body">
                     @if ($latestContacts->isEmpty())

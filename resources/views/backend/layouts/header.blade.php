@@ -55,10 +55,10 @@
                         <div class="tab-content" id="mysrpTabContent">
                             <div class="tab-pane fade show active" id="drp-tab-1" role="tabpanel"
                                 aria-labelledby="drp-t1" tabindex="0">
-                                <a href="{{ route('profile.edit') }}" class="dropdown-item">
+                                {{-- <a href="{{ route('profile.edit') }}" class="dropdown-item">
                                     <i class="ti ti-user"></i>
                                     <span>Lihat Profile</span>
-                                </a>
+                                </a> --}}
                                 <form method="POST" action="{{ route('logout') }}" style="display: none;">
                                     @csrf
                                 </form>

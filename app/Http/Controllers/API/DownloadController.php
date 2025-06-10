@@ -100,8 +100,8 @@ class DownloadController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'file_name' => 'required|string|max:255', // Maksimal ukuran 10MB
-            'file' => 'required|mimes:pdf|max:10240', // Maksimal ukuran 10MB
+            'file_name' => 'required|string|max:255',
+            'file' => 'required|mimes:pdf|max:10240',
         ]);
 
         try {
