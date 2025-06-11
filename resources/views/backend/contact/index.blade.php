@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Contact')
+@section('title', 'Hubungi Kami')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Create Bidang')
+@section('title', 'Buat Bidang')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Create Download')
+@section('title', 'Buat Unduhan')
 
 @section('content')
 
@@ -18,6 +18,7 @@
                         <div class="form-group">
                             <label for="file">Pilih File PDF</label>
                             <input type="file" name="file" id="file" class="form-control" required>
+                            <p class="text-danger">* Ukuran maksimal file upload hanya 5MB dengan format PDF</p>
                         </div>
                         <button type="submit" class="btn btn-success mt-3">Upload</button>
                     </form>

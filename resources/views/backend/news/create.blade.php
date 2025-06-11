@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Create News')
+@section('title', 'Buat Berita')
 
 @section('content')
 
@@ -23,6 +23,7 @@
                         <div class="form-group">
                             <label for="image">Gambar Berita</label>
                             <input type="file" name="image" id="image" class="form-control" required>
+                            <p class="text-danger">* Ukuran maksimal file upload hanya 5MB</p>
                         </div>
 
                         <div class="form-group">

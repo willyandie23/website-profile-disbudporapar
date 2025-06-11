@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Buat Gallery')
+@section('title', 'Buat Galeri')
 
 @section('content')
     <div class="row">
@@ -22,6 +22,7 @@
                         <div class="form-group">
                             <label for="image">Gambar Galeri</label>
                             <input type="file" name="image" id="image" class="form-control" required>
+                            <p class="text-danger">* Ukuran maksimal file upload hanya 5MB</p>
                         </div>
 
                         <button type="submit" class="btn btn-success mt-3">Simpan</button>

@@ -22,6 +22,7 @@
                         <div class="form-group">
                             <label for="image">Gambar Banner</label>
                             <input type="file" name="image" id="image" class="form-control" required>
+                            <p class="text-danger">* Ukuran maksimal file upload hanya 5MB dengan dimensi 1920x1080</p>
                         </div>
 
                         <button type="submit" class="btn btn-success mt-3">Simpan</button>

@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Edit Daftar Organisasi')
+@section('title', 'Perbaharui Anggota')
 
 @section('content')
 

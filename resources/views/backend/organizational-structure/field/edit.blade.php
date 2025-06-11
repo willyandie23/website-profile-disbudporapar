@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Edit Bidang')
+@section('title', 'Perbaharui Bidang')
 
 @section('content')
 

@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Detail Contact')
+@section('title', 'Detail Hubungi Kami')
 
 @push('css')
     <style>

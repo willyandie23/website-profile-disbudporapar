@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Download')
+@section('title', 'Unduhan')
 
 @section('content')
 

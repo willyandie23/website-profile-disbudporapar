@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Identity')
+@section('title', 'Identitas Website')
 
 @section('content')
     <div class="row">

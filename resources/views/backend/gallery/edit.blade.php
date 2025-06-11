@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 
-@section('title', 'Edit Gallery')
+@section('title', 'Perbaharui Galeri')
 
 @section('content')
 
@@ -32,6 +32,7 @@
                                 id="image"
                                 class="form-control"
                             >
+                            <p class="text-danger">* Ukuran maksimal file upload hanya 5MB</p>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
