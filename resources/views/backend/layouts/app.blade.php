@@ -91,7 +91,7 @@
     <script>
         const csrf_token = '{{ csrf_token() }}';
         const token = "{{ session('api_token') }}";
-        console.log('API token:', token);
+        // console.log('API token:', token);
     </script>
 
         <script>
@@ -100,26 +100,26 @@
                 url: '/api/identities',
                 type: 'GET',
                 success: function(response) {
-                    console.log('API Response:', response);
+                    // console.log('API Response:', response);
                     if (response.success && response.data) {
                         if (response.data.site_favicon) {
                             $('#site_favicon').attr('href', response.data.site_favicon);
-                            console.log('Favicon set to:', response.data.site_favicon);
+                            // console.log('Favicon set to:', response.data.site_favicon);
                         } else {
-                            console.log('No favicon in response');
+                            // console.log('No favicon in response');
                         }
                         if (response.data.site_logo) {
                             $('#site_logo').attr('src', response.data.site_logo).show();
-                            console.log('Logo set to:', response.data.site_logo);
+                            // console.log('Logo set to:', response.data.site_logo);
                         } else {
-                            console.log('No logo in response');
+                            // console.log('No logo in response');
                         }
                     } else {
                         console.log('Invalid response format:', response);
                     }
                 },
                 error: function(xhr) {
-                    console.error('Error fetching Identities data:', xhr.responseText);
+                    // console.error('Error fetching Identities data:', xhr.responseText);
                     Swal.fire('Error!', 'Failed to load Identities data.', 'error');
                 }
             });

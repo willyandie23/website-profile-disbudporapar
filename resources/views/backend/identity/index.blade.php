@@ -108,15 +108,15 @@
             const socialYoutubeInput = $('#sm_youtube');
 
             // Debugging: Periksa apakah siteLogoInput ditemukan
-            console.log('siteLogoInput:', siteLogoInput);
+            // console.log('siteLogoInput:', siteLogoInput);
             if (siteLogoInput.length === 0) {
-                console.error('Element with ID site_logo not found');
+                // console.error('Element with ID site_logo not found');
                 Swal.fire('Error!', 'Input file for logo not found.', 'error');
                 return;
             }
-            console.log('siteFaviconInput:', siteFaviconInput);
+            // console.log('siteFaviconInput:', siteFaviconInput);
             if (siteFaviconInput.length === 0) {
-                console.error('Element with ID site_favicon not found');
+                // console.error('Element with ID site_favicon not found');
                 Swal.fire('Error!', 'Input file for favicon not found.', 'error');
                 return;
             }
@@ -124,7 +124,7 @@
             // Preview gambar
             siteLogoInput.on('change', function() {
                 const file = this.files[0];
-                console.log('Selected file:', file); // Debugging
+                // console.log('Selected file:', file); // Debugging
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {
@@ -145,7 +145,7 @@
             // Preview gambar
             siteFaviconInput.on('change', function() {
                 const file = this.files[0];
-                console.log('Selected file:', file); // Debugging
+                // console.log('Selected file:', file); // Debugging
                 if (file) {
                     const reader = new FileReader();
                     reader.onload = function(e) {

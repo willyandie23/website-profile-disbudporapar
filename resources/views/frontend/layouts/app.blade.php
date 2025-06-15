@@ -3,7 +3,7 @@
 
     <head>
         <meta charset="utf-8">
-        <title>@yield('title', 'DISBUDPORAPAR')</title>
+        <title id="dynamic-title">@yield('title', 'Loading...')</title>
         <meta content="width=device-width, initial-scale=1.0" name="viewport">
         <meta content="" name="keywords">
         <meta content="" name="description">
@@ -117,17 +117,24 @@
                 url: '/api/identities',
                 type: 'GET',
                 success: function(response) {
-                    console.log('API Response:', response);
+                    // console.log('API Response:', response);
                     if (response.success && response.data) {
+                        const routeTitle = $('#dynamic-title').text();
+                        if (routeTitle === 'Loading...') {
+                            if (response.data.site_heading) {
+                                $('#dynamic-title').text(response.data.site_heading);
+                            }
+                        }
+
                         if (response.data.site_favicon) {
                             $('#site_favicon').attr('href', response.data.site_favicon);
-                            console.log('Favicon set to:', response.data.site_favicon);
+                            // console.log('Favicon set to:', response.data.site_favicon);
                         } else {
                             console.log('No favicon in response');
                         }
                         if (response.data.site_logo) {
                             $('.site_logo').attr('src', response.data.site_logo).show();
-                            console.log('Logo set to:', response.data.site_logo);
+                            // console.log('Logo set to:', response.data.site_logo);
                         } else {
                             console.log('No logo in response');
                         }
@@ -135,37 +142,37 @@
                         // Set social media links
                         if (response.data.sm_facebook) {
                             $('#sm_fb').attr('href', response.data.sm_facebook);
-                            console.log('Facebook link set to:', response.data.sm_facebook);
+                            // console.log('Facebook link set to:', response.data.sm_facebook);
                         }
                         if (response.data.sm_instagram) {
                             $('#sm_ig').attr('href', response.data.sm_instagram);
-                            console.log('Instagram link set to:', response.data.sm_instagram);
+                            // console.log('Instagram link set to:', response.data.sm_instagram);
                         }
                         if (response.data.sm_youtube) {
                             $('#sm_ytb').attr('href', response.data.sm_youtube);
-                            console.log('YouTube link set to:', response.data.sm_youtube);
+                            // console.log('YouTube link set to:', response.data.sm_youtube);
                         }
                         if (response.data.sm_x) {
                             $('#sm_x').attr('href', response.data.sm_x);
-                            console.log('YouTube link set to:', response.data.sm_youtube);
+                            // console.log('YouTube link set to:', response.data.sm_youtube);
                         }
 
                         // Additional fields like cp_address, cp_phone, etc.
                         if (response.data.cp_address) {
                             $('#cp_address').html('<i class="fa fa-map-marker-alt me-2"></i>' + response.data.cp_address);;
-                            console.log('Contact address set to:', response.data.cp_address);
+                            // console.log('Contact address set to:', response.data.cp_address);
                         }
                         if (response.data.cp_phone) {
                             $('#cp_phone').html('<i class="fas fa-phone me-2"></i>' + response.data.cp_phone);
-                            console.log('Phone number set to:', response.data.cp_phone);
+                            // console.log('Phone number set to:', response.data.cp_phone);
                         }
                         if (response.data.cp_email) {
                             $('#cp_email').html('<i class="fas fa-envelope me-2"></i>' + response.data.cp_email);
-                            console.log('Email address set to:', response.data.cp_email);
+                            // console.log('Email address set to:', response.data.cp_email);
                         }
                         if (response.data.cp_agency) {
                             $('#cp_agency').text(response.data.cp_agency);
-                            console.log('Agency name set to:', response.data.cp_agency);
+                            // console.log('Agency name set to:', response.data.cp_agency);
                         }
                     } else {
                         console.log('Invalid response format:', response);
