@@ -14,6 +14,10 @@
                             <label for="site_heading">Judul Website</label>
                             <input type="text" class="form-control" id="site_heading" name="site_heading" required>
                         </div>
+                        <div class="form-group mb-3 mt-3">
+                            <label for="site_ytb">YouTube</label>
+                            <input type="text" class="form-control" id="site_ytb" name="site_ytb" value="{{ old('site_ytb', $identity->site_ytb ?? '') }}">
+                        </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group mb-3">
@@ -65,7 +69,7 @@
                                     <input type="url" class="form-control" id="sm_instagram" name="sm_instagram">
                                 </div>
                                 <div class="form-group mb-3">
-                                    <label for="sm_x">X</label>
+                                    <label for="sm_x">TikTok</label>
                                     <input type="url" class="form-control" id="sm_x" name="sm_x">
                                 </div>
                                 <div class="form-group mb-3">
@@ -89,6 +93,7 @@
         $(document).ready(function() {
             const form = $('#identityForm');
             const siteHeadingInput = $('#site_heading');
+            const siteYtbInput = $('#site_ytb');
             const siteLogoInput = $('#site_logo_input');
             const siteLogoPreview = $('#site_logo_preview');
             const siteFaviconInput = $('#site_favicon_input');
@@ -166,6 +171,7 @@
                 success: function(response) {
                     if (response.success && response.data) {
                         siteHeadingInput.val(response.data.site_heading || '');
+                        siteYtbInput.val(response.data.site_ytb || '');
                         if (response.data.site_logo) {
                             siteLogoPreview.attr('src', response.data.site_logo).show();
                         }
@@ -200,6 +206,7 @@
 
                 const formData = new FormData();
                 formData.append('site_heading', siteHeadingInput.val());
+                formData.append('site_ytb', siteYtbInput.val());
                 formData.append('cp_address', contactAddressInput.val());
                 formData.append('cp_phone', contactPhoneInput.val());
                 formData.append('cp_email', contactEmailInput.val());

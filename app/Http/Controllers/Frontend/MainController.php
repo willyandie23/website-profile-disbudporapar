@@ -10,6 +10,7 @@ use App\Models\Download;
 use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Identity;
 
 class MainController extends Controller
 {
@@ -48,6 +49,10 @@ class MainController extends Controller
         $tourism_department = $organizations->where('position', 'KEPALA BIDANG PARIWISATA');
         $youth_department = $organizations->where('position', 'KEPALA BIDANG KEPEMUDAAN');
         $sports_department = $organizations->where('position', 'KEPALA BIDANG OLAHRAGA');
+        
+        $youtube_video = Identity::where('key', 'site_ytb')->first();
+        
+        $youtube_value = $youtube_video->value;
 
         return view('frontend.main.index', [
             'submenu' => false,
@@ -66,6 +71,7 @@ class MainController extends Controller
             'tourism_department' => $tourism_department,
             'youth_department' => $youth_department,
             'sports_department' => $sports_department,
+            'youtube_value' => $youtube_value,
         ]);
     }
 }

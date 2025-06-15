@@ -15,7 +15,8 @@
                 <div class="footer-item d-flex flex-column">
                     <h4 class="text-white mb-4">Link Lainnya</h4>
                     <a href="https://portal.katingankab.go.id/"><i class="fas fa-angle-right me-2"></i> Portal Katingan</a>
-                    <a href="https://singkah.katingankab.go.id/"><i class="fas fa-angle-right me-2"></i> Singkah Katingan</a>                </div>
+                    <a href="https://singkah.katingankab.go.id/"><i class="fas fa-angle-right me-2"></i> Singkah Katingan</a>
+                </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
                 <div class="footer-item d-flex flex-column">
@@ -26,6 +27,9 @@
                         </a>
                         <a class="btn btn-secondary btn-md-square rounded-circle me-3" id="sm_ytb" href="">
                             <i class="fab fa-youtube"></i>
+                        </a>
+                        <a class="btn btn-secondary btn-md-square rounded-circle me-3" id="sm_x" href="">
+                            <i class="fab fa-tiktok"></i>
                         </a>
                         <a class="btn btn-secondary btn-md-square rounded-circle me-3" id="sm_ig" href="">
                             <i class="fab fa-instagram"></i>

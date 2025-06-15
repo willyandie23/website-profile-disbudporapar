@@ -129,13 +129,13 @@
                     </ul>
 
                     <!-- Video Section -->
-                    <div class="pt-5">
-                        <div class="text-left mx-auto pb-5 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
+                    <div>
+                        <div class="text-left mx-auto pb-3 wow fadeInUp" data-wow-delay="0.2s" style="max-width: 800px;">
                             <h2 class="section-title text-uppercase text-black mt-5">Video</h2>
                         </div>
                         <!-- Embed YouTube Video -->
                         <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/iQ7Vwwe_kDY" allowfullscreen></iframe>
+                            <iframe src="https://www.youtube.com/embed/{{ $youtube_value }}" allowfullscreen></iframe>
                         </div>
                     </div>
                 </div>

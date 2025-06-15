@@ -145,6 +145,10 @@
                             $('#sm_ytb').attr('href', response.data.sm_youtube);
                             console.log('YouTube link set to:', response.data.sm_youtube);
                         }
+                        if (response.data.sm_x) {
+                            $('#sm_x').attr('href', response.data.sm_x);
+                            console.log('YouTube link set to:', response.data.sm_youtube);
+                        }
 
                         // Additional fields like cp_address, cp_phone, etc.
                         if (response.data.cp_address) {

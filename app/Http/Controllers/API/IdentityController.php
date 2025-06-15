@@ -69,6 +69,7 @@ class IdentityController extends Controller
      *             mediaType="multipart/form-data",
      *             @OA\Schema(
      *                 @OA\Property(property="site_heading", type="string", example="My Website"),
+     *                 @OA\Property(property="site_ytb", type="string", format="KqcG3gfhg-w"),
      *                 @OA\Property(property="site_logo", type="string", format="binary"),
      *                 @OA\Property(property="site_favicon", type="string", format="binary"),
      *                 @OA\Property(property="cp_address", type="string", example="123 Main Street"),
@@ -117,6 +118,7 @@ class IdentityController extends Controller
     {
         $validatedData = $request->validate([
             'site_heading' => 'nullable|string|max:255',
+            'site_ytb' => 'nullable|string|max:255',
             'site_logo' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
             'site_favicon' => 'nullable|image|mimes:jpg,jpeg,png,gif,svg|max:2048',
             'cp_address' => 'nullable|string',
