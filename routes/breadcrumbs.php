@@ -113,3 +113,9 @@ Breadcrumbs::for('contact.show', function (BreadcrumbTrail $trail, $contactId) {
     $trail->parent('contact.index');
     $trail->push('Kontak Pesan Detail', route('contact.show', $contactId));
 });
+
+// Profile breadcrumbs
+Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Profile', route('profile.edit'));
+});
