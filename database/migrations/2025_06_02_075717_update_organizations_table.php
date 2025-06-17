@@ -12,9 +12,6 @@ class UpdateOrganizationsTable extends Migration
     public function up(): void
     {
         Schema::table('organizations', function (Blueprint $table) {
-            // Menghapus kolom category_id
-            $table->dropColumn('category_id');
-
             // Menambahkan kolom NIP
             $table->string('NIP')->nullable(); // Tentukan tipe data sesuai kebutuhan Anda
         });
@@ -26,9 +23,6 @@ class UpdateOrganizationsTable extends Migration
     public function down(): void
     {
         Schema::table('organizations', function (Blueprint $table) {
-            // Menambah kembali kolom category_id jika rollback dilakukan
-            $table->unsignedBigInteger('category_id')->nullable();
-
             // Menghapus kolom NIP jika rollback dilakukan
             $table->dropColumn('NIP');
         });
