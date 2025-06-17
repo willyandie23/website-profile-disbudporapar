@@ -119,3 +119,17 @@ Breadcrumbs::for('profile.edit', function (BreadcrumbTrail $trail) {
     $trail->parent('dashboard');
     $trail->push('Profile', route('profile.edit'));
 });
+
+// Link breadcrumbs
+Breadcrumbs::for('link.index', function (BreadcrumbTrail $trail) {
+    $trail->parent('dashboard');
+    $trail->push('Daftar Link', route('link.index'));
+});
+Breadcrumbs::for('link.create', function (BreadcrumbTrail $trail) {
+    $trail->parent('link.index');
+    $trail->push('Tambah Link', route('link.create'));
+});
+Breadcrumbs::for('link.edit', function (BreadcrumbTrail $trail, $linkId) {
+    $trail->parent('link.index');
+    $trail->push('Edit Link', route('link.edit', $linkId));
+});

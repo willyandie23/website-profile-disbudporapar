@@ -8,6 +8,7 @@ use App\Http\Controllers\API\BannerController;
 use App\Http\Controllers\API\GaleryController;
 use App\Http\Controllers\API\DownloadController;
 use App\Http\Controllers\API\IdentityController;
+use App\Http\Controllers\API\LinkController;
 use App\Http\Controllers\Frontend\MainController;
 use App\Http\Controllers\Backend\AppLogController;
 use App\Http\Controllers\API\OrganizationController;
@@ -83,6 +84,11 @@ Route::middleware('auth', 'role:admin|superadmin')->group(function() {
 
     Route::get('/contact', [BackendContactController::class, 'index'])->name('contact.index');
     Route::get('/contact/{contact}', [BackendContactController::class, 'show'])->name('contact.show');
+
+    Route::get('/link', [LinkController::class, 'linkShow'])->name('link.index');
+    Route::get('/link/create', [LinkController::class, 'create'])->name('link.create');
+    Route::get('/link/{link}/edit', [LinkController::class, 'edit'])->name('link.edit');
+    Route::post('/link', [LinkController::class, 'store'])->name('link.store');
 });
 
 require __DIR__.'/auth.php';

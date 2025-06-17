@@ -35,6 +35,11 @@
                                 Banner
                             </a>
                         </li>
+                        <li class="pc-item">
+                            <a class="pc-link" href="{{ route('link.index') }} ">
+                                Link
+                            </a>
+                        </li>
                     </ul>
                 </li>
                 <li class="pc-item pc-hasmenu">

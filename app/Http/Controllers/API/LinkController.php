@@ -2,36 +2,37 @@
 
 namespace App\Http\Controllers\API;
 
+use App\Models\Link;
+use Illuminate\Http\Request;
 use App\Classes\ApiResponseClass;
 use App\Http\Controllers\Controller;
-use App\Models\Field;
-use Illuminate\Http\Request;
+
 
 /**
  * @OA\Schema(
- *     schema="field",
+ *     schema="link",
  *     type="object",
  *     @OA\Property(property="id", type="integer", example=1),
- *     @OA\Property(property="name", type="string", example="Bidang Olahraga"),
- *     @OA\Property(property="description", type="string", example="Bidang ini adalah..."),
+ *     @OA\Property(property="name", type="string", example="Portal Katingan"),
+ *     @OA\Property(property="link", type="string", example="https://portal.katingankab.go.id/"),
  *     @OA\Property(property="created_at", type="string", format="date-time"),
  *     @OA\Property(property="updated_at", type="string", format="date-time")
  * )
  */
-class FieldController extends Controller
+class LinkController extends Controller
 {
     /**
      * @OA\Get(
-     *     path="/api/fields",
-     *     summary="Retrieve a list of Fields",
-     *     tags={"Fields"},
+     *     path="/api/links",
+     *     summary="Retrieve a list of link",
+     *     tags={"Links"},
      *     security={{"bearerAuth": {}}},
      *     @OA\Response(
      *         response=200,
-     *         description="Fields retrieved successfully",
+     *         description="Links retrieved successfully",
      *         @OA\JsonContent(
      *            type="array",
-     *             @OA\Items(ref="#/components/schemas/field")
+     *             @OA\Items(ref="#/components/schemas/link")
      *         )
      *     ),
      *     @OA\Response(
@@ -54,44 +55,44 @@ class FieldController extends Controller
     public function index()
     {
         try {
-            $fields = Field::orderBy('id', 'asc')->get();
+            $links = Link::orderBy('id', 'asc')->get();
 
             return ApiResponseClass::success(
-                $fields,
-                "Fields retrieved successfully"
+                $links,
+                "Links retrieved successfully"
             );
         } catch (\Throwable $e) {
             return ApiResponseClass::errorException(
                 $e,
-                "Failed to retrieve Fields Data"
+                "Failed to retrieve Links Data"
             );
         }
     }
 
     /**
      * @OA\Post(
-     *     path="/api/fields",
-     *     tags={"Fields"},
-     *     summary="Create a new Fields",
-     *     description="Create a new Fields",
+     *     path="/api/links",
+     *     tags={"Links"},
+     *     summary="Create a new Links",
+     *     description="Create a new Links",
      *     security={{"bearerAuth": {}}},
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
      *             @OA\Property(property="name", type="string"),
-     *             @OA\Property(property="description", type="string"),
+     *             @OA\Property(property="link", type="string"),
      *         )
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Fields created successfully",
+     *         description="Links created successfully",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Fields created successfully"),
+     *             @OA\Property(property="message", type="string", example="Links created successfully"),
      *             @OA\Property(
-     *                 property="fields",
+     *                 property="Links",
      *                 type="object",
-     *                 @OA\Property(property="name", type="string", example="name_category_value"),
-     *                 @OA\Property(property="description", type="string", example="description_value"),
+     *                 @OA\Property(property="name", type="string", example="name_value"),
+     *                 @OA\Property(property="link", type="string", example="link_value"),
      *             )
      *         )
      *     ),
@@ -122,7 +123,7 @@ class FieldController extends Controller
      *         response=500,
      *         description="Server error",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Failed to create Fields"),
+     *             @OA\Property(property="message", type="string", example="Failed to create Links"),
      *             @OA\Property(property="error", type="string", example="Database error")
      *         )
      *     )
@@ -133,57 +134,65 @@ class FieldController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
-            'description' => 'required|string',
+            'link' => 'required|string|max:255',
         ]);
 
+        $rowCount = Link::count();
+        if ($rowCount >= 5) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Row limit exceeded',
+            ], 422);
+        }
+
         try {
-            $fields = Field::create([
+            $links = Link::create([
                 'name' => $request->name,
-                'description' => $request->description,
+                'link' => $request->link,
             ]);
             return response()->json([
-                'message' => 'Fields created successfully',
-                'Field' => $fields
+                'message' => 'Links created successfully',
+                'Link' => $links
             ], 201);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to create Fields', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to create Links', 'error' => $e->getMessage()], 500);
         }
     }
 
     /**
      * @OA\Get(
-     *     path="/api/fields/{id}",
-     *     summary="Retrieve a single Fields by ID",
-     *     tags={"Fields"},
+     *     path="/api/links/{id}",
+     *     summary="Retrieve a single Links by ID",
+     *     tags={"Links"},
      *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="Fields ID",
+     *         description="Links ID",
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Fields retrieved successfully",
+     *         description="Links retrieved successfully",
      *         @OA\JsonContent(
      *             @OA\Property(property="id", type="integer", example=1),
-     *             @OA\Property(property="name", type="string", example="Kepala Dinas"),
-     *             @OA\Property(property="description", type="string", example="Bidang ini adalah...")
+     *             @OA\Property(property="name", type="string", example="Portal Katingan"),
+     *             @OA\Property(property="link", type="string", example="https://portal.katingankab.go.id/")
      *         )
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Fields not found",
+     *         description="Links not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Fields not found")
+     *             @OA\Property(property="message", type="string", example="Links not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=500,
      *         description="Server error",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Failed to retrieve Fields"),
+     *             @OA\Property(property="message", type="string", example="Failed to retrieve Links"),
      *             @OA\Property(property="error", type="string", example="Database error")
      *         )
      *     )
@@ -193,30 +202,30 @@ class FieldController extends Controller
     public function show($id)
     {
         try {
-            $fields = Field::find($id);
+            $links = Link::find($id);
 
-            if (!$fields) {
-                return response()->json(['message' => 'Fields not found'], 404);
+            if (!$links) {
+                return response()->json(['message' => 'Links not found'], 404);
             }
 
-            return ApiResponseClass::success($fields, "Fields retrieved successfully");
+            return ApiResponseClass::success($links, "Links retrieved successfully");
         } catch (\Throwable $e) {
-            return ApiResponseClass::errorException($e, "Failed to retrieve Fields");
+            return ApiResponseClass::errorException($e, "Failed to retrieve Links");
         }
     }
 
     /**
      * @OA\Put(
-     *     path="/api/fields/{id}",
-     *     tags={"Fields"},
-     *     summary="Update an existing Fields",
-     *     description="Update an existing Fields",
+     *     path="/api/links/{id}",
+     *     tags={"Links"},
+     *     summary="Update an existing Links",
+     *     description="Update an existing Links",
      *     security={{"bearerAuth": {}}},
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="ID of the Fields to update",
+     *         description="ID of the Links to update",
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\RequestBody(
@@ -227,22 +236,22 @@ class FieldController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Fields updated successfully",
+     *         description="Links updated successfully",
      *         @OA\JsonContent(
      *             @OA\Property(property="message", type="string", example="Organization updated successfully"),
      *             @OA\Property(
-     *                 property="Fields",
+     *                 property="Links",
      *                 type="object",
-     *                 @OA\Property(property="name", type="string", example="name_organization_updated"),
-     *                 @OA\Property(property="description", type="string", example="description_updated")
+     *                 @OA\Property(property="name", type="string", example="name_updated"),
+     *                 @OA\Property(property="link", type="string", example="link_updated")
      *             )
      *         )
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Fields not found",
+     *         description="Links not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Fields not found")
+     *             @OA\Property(property="message", type="string", example="Links not found")
      *         )
      *     ),
      *     @OA\Response(
@@ -256,7 +265,7 @@ class FieldController extends Controller
      *                 @OA\Property(
      *                     property="name",
      *                     type="array",
-     *                     @OA\Items(type="string", example="The Fields field is required.")
+     *                     @OA\Items(type="string", example="The Links field is required.")
      *                 )
      *             )
      *         )
@@ -265,7 +274,7 @@ class FieldController extends Controller
      *         response=500,
      *         description="Server error",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Failed to update Fields"),
+     *             @OA\Property(property="message", type="string", example="Failed to update Links"),
      *             @OA\Property(property="error", type="string", example="Database error")
      *         )
      *     )
@@ -274,71 +283,64 @@ class FieldController extends Controller
 
     public function update(Request $request, $id)
     {
-        $fields = Field::find($id);
-        if (!$fields) {
-            return response()->json(['message' => 'Fields not found'], 404);
+        $links = Link::find($id);
+        if (!$links) {
+            return response()->json(['message' => 'Links not found'], 404);
         }
 
         $request->validate([
             'name' => 'required|string|max:255' . $id,
-            'description' => 'required|string',
+            'link' => 'required|string|max:255',
         ]);
 
         try {
-            $fields->update([
+            $links->update([
                 'name' => $request->name,
-                'description' => $request->description,
+                'link' => $request->link,
             ]);
 
             return response()->json([
-                'message' => 'Fields updated successfully',
-                'Field' => $fields
+                'message' => 'Links updated successfully',
+                'Link' => $links
             ], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to update Fields', 'error' => $e->getMessage()], 500);
+            return response()->json(['message' => 'Failed to update Links', 'error' => $e->getMessage()], 500);
         }
     }
 
     /**
      * @OA\Delete(
-     *     path="/api/fields/{id}",
-     *     tags={"Fields"},
-     *     summary="Delete a Fields",
-     *     description="Delete a Fields by ID",
+     *     path="/api/links/{id}",
+     *     tags={"Links"},
+     *     summary="Delete a Links",
+     *     description="Delete a Links by ID",
      *     security={{"bearerAuth": {}}}, 
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
      *         required=true,
-     *         description="Fields ID",
+     *         description="Links ID",
      *         @OA\Schema(type="integer")
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Fields deleted successfully",
+     *         description="Links deleted successfully",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Fields deleted successfully")
+     *             @OA\Property(property="message", type="string", example="Links deleted successfully")
      *         )
      *     ),
      *     @OA\Response(
      *         response=404,
-     *         description="Fields not found",
+     *         description="Links not found",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Fields not found")
-     *         )
-     *     ),
-     *     @OA\Response(
-     *         response=400,
-     *         description="Field cannot be deleted because it is being used by one or more organizations",
-     *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Field cannot be deleted because it is being used by one or more organizations")
+     *             @OA\Property(property="message", type="string", example="Links not found")
      *         )
      *     ),
      *     @OA\Response(
      *         response=500,
      *         description="Server error",
      *         @OA\JsonContent(
-     *             @OA\Property(property="message", type="string", example="Failed to delete Fields"),
+     *             @OA\Property(property="message", type="string", example="Failed to delete Links"),
      *             @OA\Property(property="error", type="string", example="Database error")
      *         )
      *     )
@@ -347,52 +349,42 @@ class FieldController extends Controller
 
     public function destroy($id)
     {
-        // Cari kategori berdasarkan ID
-        $fields = Field::find($id);
+        $links = Link::find($id);
 
-        if (!$fields) {
-            return response()->json(['message' => 'Field not found'], 404);
+        if (!$links) {
+            return response()->json(['message' => 'Link not found'], 404);
         }
 
         try {
-            // Cek apakah kategori ini digunakan oleh organisasi
-            if ($fields->organizations()->count() > 0) {
-                return response()->json([
-                    'message' => 'Masih Ada Anggota Yang Menggunakan Kategori Ini'
-                ], 400);
-            }
-
-            // Hapus kategori jika tidak digunakan
-            $fields->delete();
+            $links->delete();
 
             return response()->json([
-                'message' => 'Fields deleted successfully'
+                'message' => 'Links deleted successfully'
             ], 200);
 
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Failed to delete Fields',
+                'message' => 'Failed to delete Links',
                 'error' => $e->getMessage()
             ], 500);
         }
     }
 
-
     // Method untuk view (non-API)
-    public function fieldShow()
+    public function linkShow()
     {
-        return view('backend.organizational-structure.field.index');
+        return view('backend.link.index');
     }
 
     public function create()
     {
-        $fields = Field::all();
-        return view('backend.organizational-structure.field.create', compact('fields'));
+        $links = Link::all();
+        return view('backend.link.create', compact('links'));
     }
 
     public function edit($id)
     {
-        $fields = Field::findOrFail($id);
-        return view('backend.organizational-structure.field.edit', compact('fields'));
+        $links = Link::findOrFail($id);
+        return view('backend.link.edit', compact('links'));
     }
 }

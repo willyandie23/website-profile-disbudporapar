@@ -10,6 +10,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\DownloadController;
 use App\Http\Controllers\API\FieldController;
 use App\Http\Controllers\API\IdentityController;
+use App\Http\Controllers\API\LinkController;
 use App\Http\Controllers\API\OrganizationController;
 use App\Http\Controllers\Frontend\DownloadController as FrontendDownloadController;
 
@@ -29,6 +30,7 @@ Route::post('/downloads/{id}/increment', [FrontendDownloadController::class, 'in
 Route::post('/downloads/{id}/download', [DownloadController::class, 'download']);
 Route::get('/identities', [IdentityController::class, 'index']);
 Route::get('/fields', [FieldController::class, 'index']);
+Route::get('/links', [LinkController::class, 'index']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/banner', [BannerController::class, 'store']);
@@ -65,4 +67,9 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/fields/{id}', [FieldController::class, 'show']);
     Route::put('/fields/{id}', [FieldController::class, 'update']);
     Route::delete('/fields/{id}', [FieldController::class, 'destroy']);
+
+    Route::post('/links', [LinkController::class, 'store']);
+    Route::get('/links/{id}', [LinkController::class, 'show']);
+    Route::put('/links/{id}', [LinkController::class, 'update']);
+    Route::delete('/links/{id}', [LinkController::class, 'destroy']);
 });

@@ -12,10 +12,8 @@
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
-                <div class="footer-item d-flex flex-column">
-                    <h4 class="text-white mb-4">Link Lainnya</h4>
-                    <a href="https://portal.katingankab.go.id/"><i class="fas fa-angle-right me-2"></i> Portal Katingan</a>
-                    <a href="https://singkah.katingankab.go.id/"><i class="fas fa-angle-right me-2"></i> Singkah Katingan</a>
+                <div class="footer-item d-flex flex-column" id="linkList">
+                    <!-- Link akan dimuat di sini secara dinamis -->
                 </div>
             </div>
             <div class="col-md-6 col-lg-6 col-xl-3">
@@ -50,3 +48,33 @@
     </div>
 </div>
 <!-- Footer End -->
+
+@push('scripts')
+    <script>
+        $(document).ready(function() {
+            $.ajax({
+                url: '/api/links',
+                type: 'GET',
+                success: function(response) {
+                    if (response.success && response.data) {
+                        const links = response.data;
+                        let linkHtml = '<h4 class="text-white mb-4">Link Lainnya</h4>';
+                        
+                        links.forEach(link => {
+                            linkHtml += `
+                                <a href="${link.link}"><i class="fas fa-angle-right me-2"></i> ${link.name}</a>
+                            `;
+                        });
+
+                        $('#linkList').html(linkHtml);
+                    } else {
+                        console.log('Gagal memuat link');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Error fetching links:', xhr.responseText);
+                }
+            });
+        });
+    </script>
+@endpush

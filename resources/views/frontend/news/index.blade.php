@@ -166,8 +166,9 @@
 
             /* Menampilkan gambar lebih kecil */
             .news-card img {
-                width: 150px;
-                height: 150px;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
             }
 
             /* Flex direction menjadi column */
@@ -213,8 +214,9 @@
 
             /* Adjust image size for tablet */
             .news-card img {
-                width: 180px;
-                height: 180px;
+                width: 100%;
+                height: auto;
+                object-fit: cover;
             }
 
             /* Adjust title font size for medium screens */

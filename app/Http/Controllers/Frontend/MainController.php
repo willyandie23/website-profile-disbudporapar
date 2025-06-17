@@ -11,6 +11,7 @@ use App\Models\Organization;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Identity;
+use App\Models\Link;
 
 class MainController extends Controller
 {
@@ -54,6 +55,8 @@ class MainController extends Controller
         
         $youtube_value = $youtube_video->value;
 
+        $links = Link::all();
+
         return view('frontend.main.index', [
             'submenu' => false,
             'navbar' => true,
@@ -72,6 +75,7 @@ class MainController extends Controller
             'youth_department' => $youth_department,
             'sports_department' => $sports_department,
             'youtube_value' => $youtube_value,
+            'links' => $links,
         ]);
     }
 }
