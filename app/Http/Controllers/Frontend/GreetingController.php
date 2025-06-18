@@ -10,10 +10,18 @@ class GreetingController extends Controller
 {
     public function index () {
         try {
-            $organizations = Organization::where('position', 'Kepala Dinas')->get();
+            $organizations = Organization::with('field')->get();
+            $head_of_department = $organizations->whereIn('position',
+                [
+                    'Kepala Dinas', 
+                    'KEPALA DINAS', 
+                    'Plt. Kepala Dinas', 
+                    'Plt. KEPALA DINAS'
+                ]
+            );
 
             // Mengembalikan view dengan data bidang dan anggota
-            return view('frontend.greeting.index', compact('organizations'))->with([
+            return view('frontend.greeting.index', compact('head_of_department'))->with([
                 'submenu' => false,
                 'navbar'  => true,
                 'footer'  => true,

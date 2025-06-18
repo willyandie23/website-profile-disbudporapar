@@ -32,13 +32,13 @@ class OrganizationController extends Controller
         );
 
         // Mengelompokkan berdasarkan bidang
-        $cultural_department = $organizations->where('field_id', 4);
-        $tourism_department = $organizations->where('field_id', 5);
-        $youth_department = $organizations->where('field_id', 6);
-        $sports_department = $organizations->where('field_id', 7);
+        $cultural_department = $organizations->where('field_id', 3);
+        $tourism_department = $organizations->where('field_id', 4);
+        $youth_department = $organizations->where('field_id', 5);
+        $sports_department = $organizations->where('field_id', 6);
         
         // Sekretariat tambahan posisi
-        $secretariat_sub = $organizations->where('field_id', 3);
+        $secretariat_sub = $organizations->where('field_id', 2);
 
         // Mengirimkan data yang sudah dikelompokkan ke frontend
         return view('frontend.organization.index', [

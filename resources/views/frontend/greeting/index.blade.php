@@ -102,7 +102,7 @@
         <div class="container-fluid team">
             <div class="container">
                 <div class="row g-4 mb-3">
-                    @foreach ($organizations as $organization)
+                    @foreach ($head_of_department as $organization)
                         <div class="col-md-4 col-lg-4 col-md-3 wow fadeInUp" data-wow-delay="0.2s">
                             <div class="team-item">
                                 <div class="team-inner rounded">
