@@ -21,7 +21,7 @@
 
                         <div class="form-group">
                             <label for="image">Gambar Banner</label>
-                            <input type="file" name="image" id="image" class="form-control" required>
+                            <input type="file" name="image" id="image" class="form-control" required accept=".jpg, .jpeg">
                             <p class="text-danger">* Ukuran maksimal file upload hanya 5MB dengan dimensi 1920x1080</p>
                         </div>
 
@@ -34,7 +34,7 @@
 @endsection
 
 @push('scripts')
-    <script>
+    <!-- <script>
         document.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('bannerForm');
             const url = "{{ route('banner.store') }}";
@@ -49,6 +49,7 @@
                     const res = await fetch(url, {
                         method: 'POST',
                         headers: {
+                            'Authorization': token,
                             'X-CSRF-TOKEN': document.querySelector('input[name=_token]').value
                         },
                         body: formData
@@ -80,5 +81,56 @@
                 }
             });
         });
+    </script> -->
+
+    <script>
+        const apiUrl = '/api/banner';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('bannerForm');
+            // const apiUrl = '/api/banner';
+
+            form.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent the default form submission
+
+                const formData = new FormData(form);  // Create FormData instance with form data
+
+                // Log the FormData to check if the file is included
+                for (let [key, value] of formData.entries()) {
+                    console.log(key, value);  // This will log the form field names and values, including the image
+                }
+
+                console.log(token);
+
+                fetch(apiUrl, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`,  // Ensure token is added
+                        // Don't set Content-Type header, FormData handles this automatically
+                    },
+                    body: formData // Pass the FormData directly (no need for JSON.stringify)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.message === 'Banner created successfully') {
+                        Swal.fire({
+                            title: 'Success!',
+                            text: 'Banner Berhasil Dibuat',
+                            icon: 'success',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            window.location.href = '/banner'; // Redirect to the banner list
+                        });
+                    } else {
+                        throw new Error('Invalid response');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error creating Banner:', error);
+                    alert('Gagal membuat Banner: ' + error.message);
+                });
+            });
+        });
+
     </script>
 @endpush

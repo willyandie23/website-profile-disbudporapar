@@ -183,33 +183,81 @@ class BannerController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi inputan yang diperlukan
+        // Validate the input
         $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB = 5120KB
+            'image' => 'required|image|mimes:jpeg,jpg|max:5120', // 5MB
         ]);
 
-        try {
-            // Menyimpan gambar
-            $imagePath = $request->file('image')->store('banners', 'public');
+        // Check if the file is provided
+        if ($request->hasFile('image')) {
+            try {
+                // Store the file
+                $imagePath = $request->file('image')->store('banners', 'public');
+                
+                // Get the public URL
+                $imageUrl = Storage::url($imagePath); // Use the public URL for the image
 
-            // Membuat Banner baru
-            $banners = Banner::create([
-                'title' => $request->title,
-                'description' => $request->description,
-                'image' => Storage::url($imagePath)
-            ]);
-
-            // Mengirim respon sukses
+                // Create the banner
+                $banner = Banner::create([
+                    'title' => $request->title,
+                    'description' => $request->description,
+                    'image' => $imageUrl, // Save the public URL in the database
+                ]);
+                
+                // Return the response as JSON
+                return response()->json([
+                    'message' => 'Banner created successfully',
+                    'banner' => $banner
+                ], 201);
+            } catch (\Exception $e) {
+                return response()->json([
+                    'message' => 'Failed to create Banner',
+                    'error' => $e->getMessage()
+                ], 500);
+            }
+        } else {
             return response()->json([
-                'message' => 'Banner created successfully',
-                'banner' => $banners
-            ], 201);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Failed to create Banner', 'error' => $e->getMessage()], 500);
+                'message' => 'No image uploaded'
+            ], 422);
         }
     }
+
+
+
+    // {   
+    //     $image = $request->input('image', 'test image'); 
+    //     // Validate the input
+    //     $request->validate([
+    //         'title' => 'required|string|max:255',
+    //         'description' => 'nullable|string',
+    //         // 'image' => 'image|mimes:jpeg,png,jpg,gif|max:5120', // 5MB
+    //         'image' => 'nullable', // 5MB
+    //     ]);
+
+    //     // Check if the file is provided
+    //         try {
+    //             // Store the file
+    //             // $imagePath = $request->file('image')->store('banners', 'public');
+                
+    //             // Save the banner
+    //             $banner = Banner::create([
+    //                 'title' => $request->title,
+    //                 'description' => $request->description,
+    //                 'image' => $image,
+    //                 // 'image' => Storage::url($imagePath),
+    //             ]);
+                
+    //             return response()->json([
+    //                 'message' => 'Banner created successfully',
+    //                 'banner' => $banner
+    //             ], 201);
+    //         } catch (\Exception $e) {
+    //             return response()->json(['message' => 'Failed to create Banner', 'error' => $e->getMessage()], 500);
+    //         }
+
+    // }
 
 
     /**

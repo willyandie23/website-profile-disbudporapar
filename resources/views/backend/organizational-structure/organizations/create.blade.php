@@ -35,6 +35,7 @@
                         <div class="form-group">
                             <label for="image">Gambar Anggota</label>
                             <input type="file" name="image" id="image" class="form-control" required>
+                            <p class="text-danger">* Ukuran maksimal file upload hanya 5MB dengan dimensi 2800x2800</p>
                         </div>
                         
                         <button type="submit" class="btn btn-primary">Submit</button>
